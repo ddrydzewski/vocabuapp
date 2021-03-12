@@ -1,5 +1,5 @@
 import { wordsCollection } from './core';
 
-export const deleteHotel = (id: string) => {
+export const deleteWords = (id: string) => {
   wordsCollection.doc(id).delete();
 };
