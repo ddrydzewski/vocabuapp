@@ -76,5 +76,7 @@ build
 # github /workflows
 .github
 
+firebase.ts
+
 # firebase config 
 src/config/
