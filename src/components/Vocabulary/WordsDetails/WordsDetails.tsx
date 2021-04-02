@@ -3,7 +3,12 @@ import React from "react";
 import { useAppDispatch } from "../../../context/state";
 import { deleteWords } from "../../../database/delete";
 import { IWords } from "../../../types/IWords";
-import { WordBox, WordsContainer } from "./style";
+import {
+  IconContainer,
+  WordBoxLeft,
+  WordBoxRight,
+  WordsContainer
+} from "./style";
 
 interface IProps {
   words: IWords;
@@ -25,10 +30,12 @@ export const WordsDetails: React.FC<IProps> = ({ words }) => {
   return (
     <>
       <WordsContainer>
-        <WordBox>{words.engword}</WordBox>
-        <WordBox>{words.plword}</WordBox>
-        <IconLink icon="Create" onClick={handleEdit}></IconLink>
-        <IconLink icon="Delete" onClick={handleDelete}></IconLink>
+        <WordBoxLeft>{words.engword}</WordBoxLeft>
+        <WordBoxRight>{words.plword}</WordBoxRight>
+        <IconContainer>
+          <IconLink icon="Create" onClick={handleEdit}></IconLink>
+          <IconLink icon="Delete" onClick={handleDelete}></IconLink>
+        </IconContainer>
       </WordsContainer>
     </>
   );

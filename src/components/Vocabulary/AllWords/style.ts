@@ -1,10 +1,10 @@
-import { Container, styled } from "precise-ui";
+import { styled } from "precise-ui";
 import { ButtonScheme } from "../../style";
 
-export const AllWordsContainer = styled(Container)`
+export const AllWordsContainer = styled.div`
   margin: auto;
-  width: 50%;
-  background-color: whitesmoke;
+  margin-top: 25px;
+  width: 95%;
 `;
 
 export const AddButton = styled(ButtonScheme)`
@@ -13,6 +13,7 @@ export const AddButton = styled(ButtonScheme)`
   display: flex;
   width: 10%;
   justify-content: center;
+  margin-top: 35px;
   margin-bottom: 5px;
   padding: 5px;
 `;

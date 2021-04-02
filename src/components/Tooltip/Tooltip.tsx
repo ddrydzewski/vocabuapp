@@ -8,7 +8,7 @@ export const Tooltip = () => {
       <ListItems>
         <Item>
           <NavLink exact to="/words">
-            Allwords
+            Words
           </NavLink>
         </Item>
         <Item>

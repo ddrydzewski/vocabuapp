@@ -2,23 +2,21 @@ import { styled } from "precise-ui";
 
 export const HeaderContainer = styled.div`
   margin: auto;
-  padding: 3px;
-  width: 15%;
+  width: 100%;
   background-color: #379683;
   text-align: center;
   font-family: sans-serif;
-  font-size: 25px;
-  border: 2px solid #05386b;
-  border-radius: 5px;
+  font-size: 35px;
   background-color: #379683;
+  padding-top: 0.1rem;
 
   a:link {
-    color: black;
+    color: #EDF5E1;
     text-decoration: none;
   }
 
   a:visited {
-    color: black;
+    color: #EDF5E1;
     text-decoration: none;
   }
 
@@ -40,6 +38,7 @@ export const Item = styled.li`
   font-family: sans-serif;
   display: inline;
   list-style-type: none;
-  margin: 0;
-  padding: 15px;
+  margin: auto;
+  padding-left: 35px;
+  font-weight: bold;
 `;

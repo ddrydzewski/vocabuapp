@@ -3,10 +3,8 @@ import { Button, styled } from "precise-ui";
 export const MainContainer = styled.div`
   margin: auto;
   width: 100%;
-  margin-bottom: 15px;
   padding-top: 2px;
   padding-bottom: 2px;
-
   background-color: #05386b;
   font-family: sans-serif;
   font-size: 25px;
@@ -14,6 +12,10 @@ export const MainContainer = styled.div`
 
 export const HaOneStyled = styled.h1`
   margin-left: 15%;
+  color: #edf5e1;
+`;
+
+export const HaTwoStyled = styled.h2`
   color: #edf5e1;
 `;
 

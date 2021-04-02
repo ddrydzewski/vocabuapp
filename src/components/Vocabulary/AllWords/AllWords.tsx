@@ -14,12 +14,12 @@ export const AllWords = () => {
 
   return (
     <>
-      <AddButton onClick={handleModalOpen}>Add</AddButton>
       <AllWordsContainer>
         {words &&
           words.map((words) => <WordsDetails key={words.id} words={words} />)}
       </AllWordsContainer>
       {isModalOpen && <ModalWords />}
+      <AddButton onClick={handleModalOpen}>Add</AddButton>
     </>
   );
 };
