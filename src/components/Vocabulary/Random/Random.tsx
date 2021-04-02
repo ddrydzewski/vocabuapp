@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAppState } from "../../../context/state";
-import { getRandomInt } from "../../../utilts/getRandomInt";
-import { RandomContainer } from "./style";
+import { getRandomIntNotTheSame } from "../../../utilts/getRandomIntNotTheSame";
+import { RandomButton, RandomContainer, RandomWord } from "./style";
 
 export const Random = () => {
   const { words } = useAppState();
   const [randomWord, setRandomWord] = useState("Random Word");
+  const [lastNumber, setLastNumber] = useState(0);
 
   useEffect(() => {
     RndWord();
@@ -14,16 +15,17 @@ export const Random = () => {
 
   const RndWord = () => {
     if (words) {
-      const randomNumber = getRandomInt(words.length);
+      const randomNumber = getRandomIntNotTheSame(words.length, lastNumber);
+      setLastNumber(randomNumber);
       setRandomWord(words[randomNumber].engword);
     }
   };
 
   return (
     <RandomContainer>
-      <div>Random word: </div>
-      <div>{randomWord}</div>
-      <button onClick={RndWord}>Random Word</button>
+      <div>Random word</div>
+      <RandomWord>{randomWord}</RandomWord>
+      <RandomButton onClick={RndWord}>Random Word</RandomButton>
     </RandomContainer>
   );
 };
