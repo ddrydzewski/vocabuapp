@@ -4,7 +4,7 @@ import { Starter } from "../Starter/Starter";
 import { AllWords } from "../Vocabulary/AllWords/AllWords";
 import { Random } from "../Vocabulary/Random/Random";
 
-export const Contents = () => {
+export const Routes = () => {
   return (
     <div>
       <div>

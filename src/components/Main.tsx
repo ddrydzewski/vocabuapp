@@ -2,7 +2,7 @@ import * as React from "react";
 import { HashRouter } from "react-router-dom";
 import { useAppDispatch } from "../context/state";
 import { useQueryWords } from "../database/init";
-import { Contents } from "./Contents/Contents";
+import { Routes } from "./Route/Routes";
 import { MainContainer } from "./style";
 import { Tooltip } from "./Tooltip/Tooltip";
 
@@ -21,7 +21,7 @@ export const Main = () => {
           <h1>Vocabu</h1>
         </MainContainer>
         <Tooltip />
-        <Contents />
+        <Routes />
       </HashRouter>
     </>
   );
