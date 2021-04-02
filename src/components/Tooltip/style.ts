@@ -2,15 +2,15 @@ import { styled } from "precise-ui";
 
 export const HeaderContainer = styled.div`
   margin: auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  padding: 5px;
-  width: 30%;
+  padding: 3px;
+  width: 15%;
+  background-color: #379683;
   text-align: center;
   font-family: sans-serif;
   font-size: 25px;
-  border: 1px solid black;
+  border: 2px solid #05386b;
   border-radius: 5px;
+  background-color: #379683;
 
   a:link {
     color: black;
@@ -23,15 +23,13 @@ export const HeaderContainer = styled.div`
   }
 
   a:hover {
-    box-shadow: 0 0 5px coral;
+    color: #05386b;
     text-decoration: none;
   }
 
   a:active {
     text-decoration: none;
   }
-
-  
 `;
 
 export const ListItems = styled.ul`

@@ -3,7 +3,7 @@ import { HashRouter } from "react-router-dom";
 import { useAppDispatch } from "../context/state";
 import { useQueryWords } from "../database/init";
 import { Routes } from "./Route/Routes";
-import { MainContainer } from "./style";
+import { HaOneStyled, MainContainer } from "./style";
 import { Tooltip } from "./Tooltip/Tooltip";
 
 export const Main = () => {
@@ -18,7 +18,7 @@ export const Main = () => {
     <>
       <HashRouter>
         <MainContainer>
-          <h1>Vocabu</h1>
+          <HaOneStyled>Vocabu</HaOneStyled>
         </MainContainer>
         <Tooltip />
         <Routes />

@@ -2,27 +2,33 @@ import { Button, styled } from "precise-ui";
 
 export const MainContainer = styled.div`
   margin: auto;
-  margin-top: 15px;
+  width: 100%;
   margin-bottom: 15px;
-  padding: 15px;
-  width: 50%;
-  text-align: center;
+  padding-top: 2px;
+  padding-bottom: 2px;
+
+  background-color: #05386b;
   font-family: sans-serif;
   font-size: 25px;
 `;
 
+export const HaOneStyled = styled.h1`
+  margin-left: 15%;
+  color: #edf5e1;
+`;
+
 export const ButtonScheme = styled(Button)`
- font-family: sans-serif;
+  font-family: sans-serif;
   margin-top: 15px;
   font-size: 20px;
   padding: 5px;
   border-radius: 5px;
+  background-color: #8ee4af;
   &:hover {
-    background-color: white;
-    box-shadow: 0 0 3px #9ecaed;
+    box-shadow: 0 0 3px #05386b;
   }
   &:active {
-    background-color: whitesmoke;
-    box-shadow: 0 0 20px #9ecaed;
+    background-color: #379683;
+    box-shadow: 0 0 20px #05386b;
   }
-`
+`;
