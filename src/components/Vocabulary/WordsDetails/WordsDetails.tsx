@@ -27,13 +27,9 @@ export const WordsDetails: React.FC<IProps> = ({ words }) => {
       <WordsContainer>
         <WordBox>{words.engword}</WordBox>
         <WordBox>{words.plword}</WordBox>
+        <IconLink icon="Create" onClick={handleEdit}></IconLink>
+        <IconLink icon="Delete" onClick={handleDelete}></IconLink>
       </WordsContainer>
-      <IconLink icon="Create" onClick={handleEdit}>
-        Edit
-      </IconLink>
-      <IconLink icon="Delete" onClick={handleDelete}>
-        Delete
-      </IconLink>
     </>
   );
 };

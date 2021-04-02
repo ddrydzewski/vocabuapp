@@ -1,4 +1,5 @@
-import { Button, Container, styled } from "precise-ui";
+import { Container, styled } from "precise-ui";
+import { ButtonScheme } from "../../style";
 
 export const AllWordsContainer = styled(Container)`
   margin: auto;
@@ -6,20 +7,12 @@ export const AllWordsContainer = styled(Container)`
   background-color: whitesmoke;
 `;
 
-export const AddButton = styled(Button)`
+export const AddButton = styled(ButtonScheme)`
   margin: auto;
-  font-family: sans-serif;
-  font-size: 15px;
   text-align: center;
   display: flex;
-  color: black;
+  width: 10%;
   justify-content: center;
-  width: 5%;
-  height: 5%;
   margin-bottom: 5px;
   padding: 5px;
-
-  &:hover {
-    color: red;
-  }
 `;

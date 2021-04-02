@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAppState } from "../../../context/state";
 import { getRandomIntNotTheSame } from "../../../utilts/getRandomIntNotTheSame";
-import { RandomButton, RandomContainer, RandomWord } from "./style";
+import { ButtonScheme } from "../../style";
+import { RandomContainer, RandomWord } from "./style";
 
 export const Random = () => {
   const { words } = useAppState();
@@ -25,7 +26,7 @@ export const Random = () => {
     <RandomContainer>
       <div>Random word</div>
       <RandomWord>{randomWord}</RandomWord>
-      <RandomButton onClick={RndWord}>Random Word</RandomButton>
+      <ButtonScheme onClick={RndWord}>Random Word</ButtonScheme>
     </RandomContainer>
   );
 };
