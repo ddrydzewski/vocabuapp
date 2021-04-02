@@ -9,6 +9,8 @@ export const HeaderContainer = styled.div`
   text-align: center;
   font-family: sans-serif;
   font-size: 25px;
+  border: 1px solid black;
+  border-radius: 5px;
 `;
 
 export const ListItems = styled.ul`

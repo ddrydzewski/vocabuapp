@@ -3,6 +3,7 @@ import { Button, Container, styled } from "precise-ui";
 export const AllWordsContainer = styled(Container)`
   margin: auto;
   width: 50%;
+  background-color: whitesmoke;
 `;
 
 export const AddButton = styled(Button)`

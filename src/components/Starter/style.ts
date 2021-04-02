@@ -1,6 +1,6 @@
 import { styled } from "precise-ui";
 
-export const MainContainer = styled.div`
+export const StartText = styled.div`
   margin: auto;
   margin-top: 15px;
   margin-bottom: 15px;
