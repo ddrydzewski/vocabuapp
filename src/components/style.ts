@@ -1,6 +1,6 @@
-import { Button, styled } from "precise-ui";
+import styled from "styled-components";
 
-export const MainContainer = styled.div`
+export const HeaderContainer = styled.div`
   margin: auto;
   width: 100%;
   padding-top: 2px;
@@ -19,18 +19,38 @@ export const HaTwoStyled = styled.h2`
   color: #edf5e1;
 `;
 
-export const ButtonScheme = styled(Button)`
+export const ButtonScheme = styled.button`
   font-family: sans-serif;
   margin-top: 15px;
   font-size: 20px;
   padding: 5px;
   border-radius: 5px;
-  background-color: #8ee4af;
+  background-color: #05386B;
   &:hover {
     box-shadow: 0 0 3px #05386b;
   }
   &:active {
     background-color: #379683;
     box-shadow: 0 0 20px #05386b;
+  }
+`;
+
+export const LinkStyled = styled.div`
+  a:link {
+    color: #edf5e1;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: #edf5e1;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  a:active {
+    text-decoration: none;
   }
 `;

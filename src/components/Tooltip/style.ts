@@ -9,25 +9,6 @@ export const HeaderContainer = styled.div`
   font-size: 35px;
   background-color: #379683;
   padding-top: 0.1rem;
-
-  a:link {
-    color: #EDF5E1;
-    text-decoration: none;
-  }
-
-  a:visited {
-    color: #EDF5E1;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #05386b;
-    text-decoration: none;
-  }
-
-  a:active {
-    text-decoration: none;
-  }
 `;
 
 export const ListItems = styled.ul`
@@ -36,7 +17,7 @@ export const ListItems = styled.ul`
 
 export const Item = styled.li`
   font-family: sans-serif;
-  display: inline;
+  display: inline-block;
   list-style-type: none;
   margin: auto;
   padding-left: 35px;

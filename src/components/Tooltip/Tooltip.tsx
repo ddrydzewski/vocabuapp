@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { LinkStyled } from "../style";
 import { HeaderContainer, Item, ListItems } from "./style";
 
 export const Tooltip = () => {
@@ -7,12 +8,16 @@ export const Tooltip = () => {
     <HeaderContainer>
       <ListItems>
         <Item>
-          <NavLink exact to="/words">
-            Words
-          </NavLink>
+          <LinkStyled>
+            <NavLink to="/words">Words</NavLink>
+          </LinkStyled>
         </Item>
         <Item>
-          <NavLink to="/random">Random</NavLink>
+          <LinkStyled>
+            <NavLink to="/random">
+              <LinkStyled>Random</LinkStyled>
+            </NavLink>
+          </LinkStyled>
         </Item>
       </ListItems>
     </HeaderContainer>
