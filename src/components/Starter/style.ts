@@ -8,5 +8,6 @@ export const StartText = styled.div`
   width: 50%;
   text-align: center;
   font-family: sans-serif;
-  font-size: 25px;
+  font-size: 40px;
+  color: #edf5e1;
 `;

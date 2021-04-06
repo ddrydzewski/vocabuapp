@@ -1,4 +1,5 @@
 import { styled } from "precise-ui";
+import { ButtonScheme } from "../style";
 
 export const RandomContainer = styled.div`
   margin: auto;
@@ -11,8 +12,11 @@ export const RandomContainer = styled.div`
   padding: 15px;
 `;
 
-export const RandomWord = styled.div`
-  font-family: sans-serif;
-  font-size: 25px;
-  margin-top: 15px;
+export const RandomButton = styled(ButtonScheme)`
+  margin-top: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
 `;

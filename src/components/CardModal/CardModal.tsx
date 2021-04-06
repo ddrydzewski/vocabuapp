@@ -1,6 +1,6 @@
 import {
   BodyText,
-  Button,
+
   colors,
   InputChangeEvent
 } from "precise-ui/dist/es6";
@@ -11,6 +11,7 @@ import { addWords } from "../../database/add";
 import { editWords } from "../../database/edit";
 import { IWordsFirebase } from "../../types/IWordsFirebase";
 import { checkDuplicate } from "../../utilts/checkDuplicate";
+import { ButtonScheme } from "../style";
 import {
   ModalStyles,
   StyledActions,
@@ -18,33 +19,33 @@ import {
   StyledTextFieldWrapper
 } from "./style";
 
-export const emptyWords: IWordsFirebase = {
+export const emptyCard: IWordsFirebase = {
   engword: "",
   plword: "",
 };
 
-export const ModalWords: React.FC = () => {
-  const { isModalOpen, isEditMode, modalWords, words } = useAppState();
-  const [vocabu, setVocabu] = useState<IWordsFirebase>(emptyWords);
+export const CardModal: React.FC = () => {
+  const { isModalOpen, isEditMode, modalCard, words } = useAppState();
+  const [card, setCard] = useState<IWordsFirebase>(emptyCard);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    isEditMode && modalWords ? setVocabu(modalWords) : setVocabu(emptyWords);
-  }, [modalWords, isEditMode]);
+    isEditMode && modalCard ? setCard(modalCard) : setCard(emptyCard);
+  }, [modalCard, isEditMode]);
 
   const onSubmit = () => {
-    const duplicate = words && checkDuplicate(words, vocabu.engword);
+    const duplicate = words && checkDuplicate(words, card.engword);
     if (!duplicate) {
       !isEditMode ? addSubmit() : editSubmit();
     }else {
       alert("This word already exist");
     }
-    setVocabu(emptyWords);
+    setCard(emptyCard);
   };
 
   const editSubmit = () => {
-    if (vocabu.engword !== null && vocabu.plword !== null && modalWords) {
-      const helpEditWords = { ...vocabu, id: modalWords.id };
+    if (card.engword !== null && card.plword !== null && modalCard) {
+      const helpEditWords = { ...card, id: modalCard.id };
       editWords(helpEditWords);
     } else {
       alert("Check all fields");
@@ -52,8 +53,8 @@ export const ModalWords: React.FC = () => {
   };
 
   const addSubmit = () => {
-    if (vocabu.engword !== null && vocabu.plword !== null && words) {
-      addWords(vocabu);
+    if (card.engword !== null && card.plword !== null && words) {
+      addWords(card);
     } else {
       alert("Check all fields");
     }
@@ -66,7 +67,7 @@ export const ModalWords: React.FC = () => {
 
   const handleOnChange = (e: InputChangeEvent<string>) => {
     const target = e.value;
-    setVocabu({ ...vocabu, [e.originalEvent?.target.name]: target });
+    setCard({ ...card, [e.originalEvent?.target.name]: target });
   };
 
   return (
@@ -77,14 +78,14 @@ export const ModalWords: React.FC = () => {
       onRequestClose={handleOnClose}
     >
       <div>
-        <BodyText>Add your vocabu</BodyText>
+        <BodyText>Add your card</BodyText>
         <StyledTextFieldWrapper>
           <StyledTextField
             maxLength={30}
             type="string"
             name="engword"
             onChange={handleOnChange}
-            value={vocabu.engword}
+            value={card.engword}
             label="English"
           />
         </StyledTextFieldWrapper>
@@ -94,22 +95,22 @@ export const ModalWords: React.FC = () => {
             type="string"
             name="plword"
             onChange={handleOnChange}
-            value={vocabu.plword}
+            value={card.plword}
             label="Polish"
           />
         </StyledTextFieldWrapper>
       </div>
       <StyledActions>
-        <Button
+        <ButtonScheme
           type="button"
           onClick={handleOnClose}
           style={{ background: colors.grey1 }}
         >
-          Anuluj
-        </Button>
-        <Button onClick={onSubmit} style={{ background: colors.green4 }}>
-          {isEditMode ? "Edytuj" : "Dodaj"}
-        </Button>
+          Cancel
+        </ButtonScheme>
+        <ButtonScheme onClick={onSubmit} style={{ background: '#05386B' }}>
+          {isEditMode ? "Edit" : "Add"}
+        </ButtonScheme>
       </StyledActions>
     </ReactModal>
   );
