@@ -1,28 +1,51 @@
-import { Button, styled } from "precise-ui";
+import styled from "styled-components";
 
-export const MainContainer = styled.div`
+export const HeaderContainer = styled.div`
   margin: auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  padding: 15px;
-  width: 50%;
-  text-align: center;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #05386b;
   font-family: sans-serif;
-  font-size: 25px;
+  font-size: 50px;
+  color: #edf5e1;
+  font-weight: bold;
 `;
 
-export const ButtonScheme = styled(Button)`
- font-family: sans-serif;
-  margin-top: 15px;
+export const ButtonScheme = styled.button`
+  font-family: sans-serif;
   font-size: 20px;
+  font-weight: bold;
+  margin-top: 15px;
   padding: 5px;
   border-radius: 5px;
+  color: #edf5e1;
+  background-color: #05386b;
   &:hover {
-    background-color: white;
-    box-shadow: 0 0 3px #9ecaed;
+    box-shadow: 0 0 3px #05386b;
   }
   &:active {
-    background-color: whitesmoke;
-    box-shadow: 0 0 20px #9ecaed;
+    background-color: #8EE4AF;
+    box-shadow: 0 0 20px #05386b;
   }
-`
+`;
+
+export const LinkStyled = styled.div`
+  a:link {
+    color: #edf5e1;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: #edf5e1;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  a:active {
+    text-decoration: none;
+  }
+`;

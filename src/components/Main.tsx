@@ -1,10 +1,10 @@
 import * as React from "react";
-import { HashRouter } from "react-router-dom";
+import { HashRouter, NavLink } from "react-router-dom";
 import { useAppDispatch } from "../context/state";
 import { useQueryWords } from "../database/init";
-import { Contents } from "./Contents/Contents";
-import { MainContainer } from "./style";
-import { Tooltip } from "./Tooltip/Tooltip";
+import { Routes } from "./Routes/Routes";
+import { HeaderContainer, LinkStyled } from "./style";
+import { TopBar } from "./TopBar/TopBar";
 
 export const Main = () => {
   const dispatch = useAppDispatch();
@@ -17,11 +17,15 @@ export const Main = () => {
   return (
     <>
       <HashRouter>
-        <MainContainer>
-          <h1>Vocabu</h1>
-        </MainContainer>
-        <Tooltip />
-        <Contents />
+        <HeaderContainer>
+          <LinkStyled style={{margin: '15px' ,marginLeft: '40px'}}>
+            <NavLink exact to="/">
+              Vocabu
+            </NavLink>
+          </LinkStyled>
+        </HeaderContainer>
+        <TopBar />
+        <Routes />
       </HashRouter>
     </>
   );

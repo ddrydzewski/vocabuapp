@@ -5,7 +5,7 @@ type Action =
   | { type: "updateWords"; payload: IWords[] }
   | { type: "updateIsModalOpen"; payload: boolean }
   | { type: "updateIsEditMode"; payload: boolean }
-  | { type: "updateModalWords"; payload: IWords };
+  | { type: "updateModalCard"; payload: IWords };
 
 type Dispatch = (action: Action) => void;
 
@@ -13,7 +13,7 @@ type State = {
   words: IWords[] | undefined;
   isModalOpen: boolean;
   isEditMode: boolean;
-  modalWords?: IWords;
+  modalCard?: IWords;
 };
 type StateProviderProps = { children: React.ReactNode };
 
@@ -33,8 +33,8 @@ function appStateReducer(state: State, action: Action) {
     case "updateIsEditMode": {
       return { ...state, isEditMode: action.payload};
     }
-    case "updateModalWords": {
-      return { ...state, modalWords: action.payload};
+    case "updateModalCard": {
+      return { ...state, modalCard: action.payload};
     }
     default: {
       throw new Error(`Unhandled action type: ${action!.type}`);

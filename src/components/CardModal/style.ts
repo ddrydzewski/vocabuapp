@@ -1,19 +1,22 @@
-import { colors, styled, TextField } from 'precise-ui';
-import { white } from 'precise-ui/dist/es6/colors';
+import { styled, TextField } from 'precise-ui';
+import { black } from 'precise-ui/dist/es6/colors';
 
 export const ModalStyles = {
   overlay: {
+    margin: 'auto',
+    justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0)',
   },
 
   content: {
-    color: white,
+    color: black,
+    fontSize: '22px',
     top: '3.5rem',
     left: '3rem',
     width: '26rem',
     bottom: 'auto',
-    background: colors.black,
-    borderColor: colors.grey1,
+    background: '#edf5e1',
+    borderColor: 'black',
   },
 };
 
@@ -22,7 +25,9 @@ export const StyledTextFieldWrapper = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-export const StyledTextField = styled(TextField)``;
+export const StyledTextField = styled(TextField)`
+color: black;
+`;
 
 export const StyledActions = styled.div`
   display: flex;
