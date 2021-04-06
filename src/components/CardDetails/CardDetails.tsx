@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../context/state";
 import { deleteWords } from "../../database/delete";
 import { IWords } from "../../types/IWords";
-import { CardContainer, IconContainer } from "./style";
+import { CardContainer, IconContainer, WordContainer } from "./style";
 
 interface IProps {
   words: IWords;
@@ -30,7 +30,7 @@ export const CardDetails: React.FC<IProps> = ({ words }) => {
   return (
     <>
       <CardContainer onClick={handleCardSide}>
-        {cardSide ? words.engword : words.plword}
+        <WordContainer>{cardSide ? words.engword : words.plword}</WordContainer>
         <IconContainer>
           <IconLink icon="Create" onClick={handleEdit}></IconLink>
           <IconLink icon="Delete" onClick={handleDelete}></IconLink>

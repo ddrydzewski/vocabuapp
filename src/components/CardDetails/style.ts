@@ -1,22 +1,19 @@
 import { styled } from "precise-ui";
 
 export const CardContainer = styled.div`
+  background: #edf5e1;
+  border-radius: 5px;
   text-align: center;
   justify-content: center;
-  background: #edf5e1;
-  padding-top:5%;
-  border-radius: 5px;
+  padding-top:6%;
   height: 100px;
   margin: auto;
   margin-top: 12px;
   margin-left:12px; 
   margin-bottom: 1rem;
   margin-right: 1rem;
-  display: inline-flex;
+  display: inline-block;
   width: 250px;
-  color: #05386b;
-  font-size: 30px;
-  font-weight: bold;
   cursor: pointer;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.12), 0 3px 4px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -26,7 +23,17 @@ export const CardContainer = styled.div`
   }
 `;
 
+export const WordContainer = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  color: #05386b;
+  display: block;
+`;
+
 export const IconContainer = styled.div`
-  margin-left: 10px;
-  margin-bottom: 4px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  flex-shrink: 0;
+  display: block;
 `;
