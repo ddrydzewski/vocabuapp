@@ -35,7 +35,7 @@ export const CardModal: React.FC = () => {
 
   const onSubmit = () => {
     const duplicate = words && checkDuplicate(words, card.engword);
-    if (!duplicate) {
+    if (!duplicate || isEditMode) {
       !isEditMode ? addSubmit() : editSubmit();
     }else {
       alert("This word already exist");
