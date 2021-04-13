@@ -1,17 +1,5 @@
 import styled from "styled-components";
 
-export const HeaderContainer = styled.div`
-  margin: auto;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #05386b;
-  font-family: sans-serif;
-  font-size: 50px;
-  color: #edf5e1;
-  font-weight: bold;
-`;
-
 export const ButtonScheme = styled.button`
   font-family: sans-serif;
   font-size: 20px;
@@ -25,12 +13,16 @@ export const ButtonScheme = styled.button`
     box-shadow: 0 0 3px #05386b;
   }
   &:active {
-    background-color: #8EE4AF;
+    background-color: #8ee4af;
     box-shadow: 0 0 20px #05386b;
   }
 `;
 
 export const LinkStyled = styled.div`
+  a: {
+    display: block;
+  }
+
   a:link {
     color: #edf5e1;
     text-decoration: none;

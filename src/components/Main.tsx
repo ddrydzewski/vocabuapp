@@ -1,10 +1,10 @@
+import { Grid } from "precise-ui/dist/es6";
 import * as React from "react";
-import { HashRouter, NavLink } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { useAppDispatch } from "../context/state";
 import { useQueryWords } from "../database/init";
 import { Routes } from "./Routes/Routes";
-import { HeaderContainer, LinkStyled } from "./style";
-import { TopBar } from "./TopBar/TopBar";
+import { Sidebar } from "./Sidebar/Sidebar";
 
 export const Main = () => {
   const dispatch = useAppDispatch();
@@ -17,15 +17,10 @@ export const Main = () => {
   return (
     <>
       <HashRouter>
-        <HeaderContainer>
-          <LinkStyled style={{margin: '15px' ,marginLeft: '40px'}}>
-            <NavLink exact to="/">
-              Vocabu
-            </NavLink>
-          </LinkStyled>
-        </HeaderContainer>
-        <TopBar />
-        <Routes />
+        <Grid rows={1} columns={["15rem", "1fr"]}>
+          <Sidebar />
+          <Routes />
+        </Grid>
       </HashRouter>
     </>
   );

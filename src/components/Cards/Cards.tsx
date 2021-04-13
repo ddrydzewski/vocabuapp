@@ -11,7 +11,7 @@ export const Cards = () => {
   const dispatch = useAppDispatch();
   const [top, setTop] = useState(1);
   const [bottom, setBottom] = useState(0);
-  const [cardMaxNumber] = useState(15);
+  const [cardMaxNumber] = useState(12);
 
   const handleModalOpen = () => {
     dispatch({ type: "updateIsModalOpen", payload: !isModalOpen });
@@ -30,7 +30,7 @@ export const Cards = () => {
       setTop(top - 1);
     }
   };
-
+  
   return (
     <>
       <AddButton onClick={handleModalOpen}>Add</AddButton>

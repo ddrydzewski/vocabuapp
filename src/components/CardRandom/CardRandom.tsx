@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAppState } from "../../context/state";
 import { getRandomIntNotTheSame } from "../../utilts/getRandomIntNotTheSame";
 import { CardDetails } from "../CardDetails/CardDetails";
-import { RandomButton, RandomContainer } from "./style";
+import { TestsButton, TestsContainer } from "./style";
 
 export const CardRandom = () => {
   const { words } = useAppState();
@@ -26,9 +26,9 @@ export const CardRandom = () => {
   };
 
   return (
-    <RandomContainer>
+    <TestsContainer>
       {randomCard.id !== "" && <CardDetails words={randomCard} />}
-      <RandomButton onClick={setRndCard}>Random Card</RandomButton>
-    </RandomContainer>
+      <TestsButton onClick={setRndCard}>Random Card</TestsButton>
+    </TestsContainer>
   );
 };

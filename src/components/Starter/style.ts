@@ -6,7 +6,7 @@ export const StartText = styled.div`
   margin-top: 15px;
   margin-bottom: 15px;
   padding: 15px;
-  width: 50%;
+  width: auto;
   text-align: center;
   font-family: sans-serif;
   font-size: 40px;
