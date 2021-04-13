@@ -13,27 +13,27 @@ export const CardDetails: React.FC<IProps> = ({ words }) => {
   const dispatch = useAppDispatch();
   const [cardSide, setCardSide] = useState(false);
 
-  const handleDelete = () => {
+  const cardSideClick = () => {
+    setCardSide(!cardSide)
+  };  
+  
+  const onDelete = () => {
     deleteWords(words.id);
   };
 
-  const handleCardSide = () => {
-    setCardSide(!cardSide);
-  };
-
-  const handleEdit = () => {
+  const onEdit = () => {
     dispatch({ type: "updateModalCard", payload: words });
-    dispatch({ type: "updateIsEditMode", payload: true });
     dispatch({ type: "updateIsModalOpen", payload: true });
+    dispatch({ type: "updateIsEditMode", payload: true });
   };
 
   return (
     <>
-      <CardContainer onClick={handleCardSide}>
+      <CardContainer onClick={cardSideClick}>
         <WordContainer>{cardSide ? words.engword : words.plword}</WordContainer>
         <IconContainer>
-          <IconLink icon="Create" onClick={handleEdit}></IconLink>
-          <IconLink icon="Delete" onClick={handleDelete}></IconLink>
+          <IconLink icon="Create" onClick={onEdit}></IconLink>
+          <IconLink icon="Delete" onClick={onDelete}></IconLink>
         </IconContainer>
       </CardContainer>
     </>

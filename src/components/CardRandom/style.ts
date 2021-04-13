@@ -1,7 +1,7 @@
 import { styled } from "precise-ui";
 import { ButtonScheme } from "../style";
 
-export const RandomContainer = styled.div`
+export const TestsContainer = styled.div`
   margin: auto;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -12,7 +12,7 @@ export const RandomContainer = styled.div`
   padding: 15px;
 `;
 
-export const RandomButton = styled(ButtonScheme)`
+export const TestsButton = styled(ButtonScheme)`
   margin-top: 150px;
   margin-left: auto;
   margin-right: auto;

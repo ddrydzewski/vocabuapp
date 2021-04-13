@@ -3,17 +3,15 @@ import { ButtonScheme } from "../style";
 
 export const CardsContainer = styled.div`
   margin: auto;
-  margin-top: 1%;
+  justify-content: center;
   flex-direction: column;
-  position: fixed;
-  width: 50%;
-  height: 50%;
+  width: 143vh;
+  height: 75vh;
   left: 0;
   right: 0;
   background-color: #379683;
   border: 8px solid #05386b;
   border-radius: 5px;
-  position: fixed;
   overflow-y: auto;
 `;
 
@@ -29,6 +27,7 @@ export const AddButton = styled(ButtonScheme)`
 
 export const Icons = styled.div`
   margin: auto;
+  cursor: pointer;
   display: flex;
   margin-top: 5px;
   justify-content: center;

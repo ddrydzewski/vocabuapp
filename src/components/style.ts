@@ -1,17 +1,5 @@
 import styled from "styled-components";
 
-export const HeaderContainer = styled.div`
-  margin: auto;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #05386b;
-  font-family: sans-serif;
-  font-size: 50px;
-  color: #edf5e1;
-  font-weight: bold;
-`;
-
 export const ButtonScheme = styled.button`
   font-family: sans-serif;
   font-size: 20px;
