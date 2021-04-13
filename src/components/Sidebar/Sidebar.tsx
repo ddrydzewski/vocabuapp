@@ -1,7 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { LinkStyled } from "../style";
-import { HeaderContainer, SidebarElements, SidebarStyled } from "./style";
+import {
+  BoxElement,
+  HeaderContainer,
+  SidebarElements,
+  SidebarStyled
+} from "./style";
 
 export const Sidebar = () => {
   return (
@@ -14,15 +19,15 @@ export const Sidebar = () => {
         </LinkStyled>
       </HeaderContainer>
       <SidebarElements>
-        <LinkStyled style={{marginBottom: "15%"}}>
+        <BoxElement>
           <NavLink to="/words">Words</NavLink>
-        </LinkStyled>
-        <LinkStyled style={{marginBottom: "15%"}}>
+        </BoxElement>
+        <BoxElement>
           <NavLink to="/random">Random</NavLink>
-        </LinkStyled>
-        <LinkStyled>
+        </BoxElement>
+        <BoxElement>
           <NavLink to="/test">Test</NavLink>
-        </LinkStyled>
+        </BoxElement>
       </SidebarElements>
     </SidebarStyled>
   );

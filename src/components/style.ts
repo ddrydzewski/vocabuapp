@@ -13,12 +13,16 @@ export const ButtonScheme = styled.button`
     box-shadow: 0 0 3px #05386b;
   }
   &:active {
-    background-color: #8EE4AF;
+    background-color: #8ee4af;
     box-shadow: 0 0 20px #05386b;
   }
 `;
 
 export const LinkStyled = styled.div`
+  a: {
+    display: block;
+  }
+
   a:link {
     color: #edf5e1;
     text-decoration: none;
