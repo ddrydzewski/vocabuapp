@@ -2,11 +2,12 @@ import { styled } from "precise-ui";
 import { ButtonScheme } from "../style";
 
 export const CardsContainer = styled.div`
-  margin: auto;
+  margin-left: 8%;
+  margin-top: 1%;
   justify-content: center;
   flex-direction: column;
-  width: 143vh;
-  height: 75vh;
+  width: 80%;
+  height: 70vh;
   left: 0;
   right: 0;
   background-color: #379683;
@@ -17,20 +18,18 @@ export const CardsContainer = styled.div`
 
 export const AddButton = styled(ButtonScheme)`
   margin: auto;
+  margin-top: 3px;
   text-align: center;
-  display: flex;
-  width: 10%;
   justify-content: center;
-  margin-top: 35px;
-  padding: 5px;
+  padding: 8px;
+  display: flex;
 `;
 
 export const Icons = styled.div`
-  margin: auto;
   cursor: pointer;
+  margin: auto;
   display: flex;
-  margin-top: 5px;
   justify-content: center;
-  font-size:20px;
-  text-align:center;
+  font-size: 20px;
+  text-align: center;
 `;

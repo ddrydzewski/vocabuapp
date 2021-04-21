@@ -4,21 +4,11 @@ import { LinkStyled } from "../style";
 
 export const SidebarStyled = styled(Container)`
   flex-direction: column;
-  height: 100vh;
+  height: 90vh;
   flex: 1;
   display: flex;
   background: #379683;
   color: black;
-`;
-
-export const HeaderContainer = styled.div`
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #05386b;
-  font-family: sans-serif;
-  font-size: 50px;
-  color: #edf5e1;
-  font-weight: bold;
 `;
 
 export const SidebarElements = styled.div`

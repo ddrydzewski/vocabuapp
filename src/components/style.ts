@@ -19,10 +19,6 @@ export const ButtonScheme = styled.button`
 `;
 
 export const LinkStyled = styled.div`
-  a: {
-    display: block;
-  }
-
   a:link {
     color: #edf5e1;
     text-decoration: none;

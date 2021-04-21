@@ -11,8 +11,8 @@ export const ModalStyles = {
   content: {
     color: black,
     fontSize: '22px',
-    top: '3.5rem',
-    left: '3rem',
+    top: '8.5rem',
+    left: '18rem',
     width: '26rem',
     bottom: 'auto',
     background: '#edf5e1',

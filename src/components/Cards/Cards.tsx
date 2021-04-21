@@ -33,12 +33,6 @@ export const Cards = () => {
   
   return (
     <>
-      <AddButton onClick={handleModalOpen}>Add</AddButton>
-      <Icons>
-        <Icon name="KeyboardArrowLeft" onClick={handlePrevCards} size={3.5}></Icon>
-        {top}
-        <Icon name="KeyboardArrowRight" onClick={handleNextCards} size={3.5}></Icon>
-      </Icons>
       <CardsContainer>
         {words &&
           words
@@ -46,6 +40,12 @@ export const Cards = () => {
             .map((words) => <CardDetails key={words.id} words={words} />)}
       </CardsContainer>
       {isModalOpen && <CardModal />}
+      <AddButton onClick={handleModalOpen}><Icon name="Add"/></AddButton>
+      <Icons>
+        <Icon name="KeyboardArrowLeft" onClick={handlePrevCards} size={3.5}></Icon>
+        {top}
+        <Icon name="KeyboardArrowRight" onClick={handleNextCards} size={3.5}></Icon>
+      </Icons>
     </>
   );
 };
