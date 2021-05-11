@@ -25,7 +25,7 @@ export const emptyCard: IWordsFirebase = {
 };
 
 export const CardModal: React.FC = () => {
-  const { isModalOpen, isEditMode, modalCard, words } = useAppState();
+  const { isModalOpen, isEditMode, modalCard, words, wordsCollection } = useAppState();
   const [card, setCard] = useState<IWordsFirebase>(emptyCard);
   const dispatch = useAppDispatch();
 
@@ -46,7 +46,7 @@ export const CardModal: React.FC = () => {
   const editSubmit = () => {
     if (card.engword !== null && card.plword !== null && modalCard) {
       const helpEditWords = { ...card, id: modalCard.id };
-      editWords(helpEditWords);
+      editWords(helpEditWords, wordsCollection);
     } else {
       alert("Check all fields");
     }
@@ -54,7 +54,7 @@ export const CardModal: React.FC = () => {
 
   const addSubmit = () => {
     if (card.engword !== null && card.plword !== null && words) {
-      addWords(card);
+      addWords(card, wordsCollection);
     } else {
       alert("Check all fields");
     }

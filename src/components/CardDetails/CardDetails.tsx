@@ -1,6 +1,6 @@
 import { IconLink } from "precise-ui/dist/es6";
 import React, { useState } from "react";
-import { useAppDispatch } from "../../context/state";
+import { useAppDispatch, useAppState } from "../../context/state";
 import { deleteWords } from "../../database/delete";
 import { IWords } from "../../types/IWords";
 import { CardContainer, IconContainer, WordContainer } from "./style";
@@ -12,13 +12,18 @@ interface IProps {
 export const CardDetails: React.FC<IProps> = ({ words }) => {
   const dispatch = useAppDispatch();
   const [cardSide, setCardSide] = useState(false);
+  const { wordsCollection } = useAppState();
 
   const cardSideClick = () => {
-    setCardSide(!cardSide)
-  };  
-  
+    setCardSide(!cardSide);
+  };
+
   const onDelete = () => {
-    deleteWords(words.id);
+    deleteWords(words.id, wordsCollection);
+  };
+
+  const confirmDelete = () => {
+    if (window.confirm("do you really want to delete it ?")) onDelete();
   };
 
   const onEdit = () => {
@@ -33,7 +38,7 @@ export const CardDetails: React.FC<IProps> = ({ words }) => {
         <WordContainer>{cardSide ? words.engword : words.plword}</WordContainer>
         <IconContainer>
           <IconLink icon="Create" onClick={onEdit}></IconLink>
-          <IconLink icon="Delete" onClick={onDelete}></IconLink>
+          <IconLink icon="Delete" onClick={confirmDelete}></IconLink>
         </IconContainer>
       </CardContainer>
     </>

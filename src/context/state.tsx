@@ -1,11 +1,18 @@
+import firebase from "firebase";
 import * as React from "react";
 import { IWords } from "../types/IWords";
+import { IWordsFirebase } from "../types/IWordsFirebase";
 
 type Action =
   | { type: "updateWords"; payload: IWords[] }
   | { type: "updateIsModalOpen"; payload: boolean }
   | { type: "updateIsEditMode"; payload: boolean }
-  | { type: "updateModalCard"; payload: IWords };
+  | { type: "updateModalCard"; payload: IWords }
+  | { type: "updateIsFetched"; payload: boolean }
+  | {
+      type: "updateWordsCollection";
+      payload: firebase.firestore.CollectionReference<IWordsFirebase>;
+    };
 
 type Dispatch = (action: Action) => void;
 
@@ -14,13 +21,20 @@ type State = {
   isModalOpen: boolean;
   isEditMode: boolean;
   modalCard?: IWords;
+  isFetched: boolean;
+  wordsCollection?: firebase.firestore.CollectionReference<IWordsFirebase>;
 };
 type StateProviderProps = { children: React.ReactNode };
 
 const AppStateContext = React.createContext<State | undefined>(undefined);
 const AppDispatchContext = React.createContext<Dispatch | undefined>(undefined);
 
-const initAppState: State = { words: [] , isEditMode: false, isModalOpen: false};
+const initAppState: State = {
+  words: [],
+  isEditMode: false,
+  isModalOpen: false,
+  isFetched: false,
+};
 
 function appStateReducer(state: State, action: Action) {
   switch (action.type) {
@@ -28,13 +42,19 @@ function appStateReducer(state: State, action: Action) {
       return { ...state, words: action.payload };
     }
     case "updateIsModalOpen": {
-      return { ...state, isModalOpen: action.payload};
+      return { ...state, isModalOpen: action.payload };
     }
     case "updateIsEditMode": {
-      return { ...state, isEditMode: action.payload};
+      return { ...state, isEditMode: action.payload };
     }
     case "updateModalCard": {
-      return { ...state, modalCard: action.payload};
+      return { ...state, modalCard: action.payload };
+    }
+    case "updateIsFetched": {
+      return { ...state, isFetched: action.payload };
+    }
+    case "updateWordsCollection": {
+      return { ...state, wordsCollection: action.payload };
     }
     default: {
       throw new Error(`Unhandled action type: ${action!.type}`);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAppState } from "../../context/state";
+import emptyLogo from "../../icons/empty-512.png";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { TestsButton, TestsContainer } from "../CardRandom/style";
 
@@ -14,8 +15,11 @@ export const CardLearn = () => {
 
   return (
     <TestsContainer>
-        {next + 1} / {words?.length}
-      {words && <CardDetails words={words[next]} />}
+      {words && words?.length > 0 ? (
+        <CardDetails words={words[next]} />
+      ) : (
+        <img src={emptyLogo} alt="fireSpot"></img>
+      )}
       <TestsButton onClick={handleNextCard}>Next Card</TestsButton>
     </TestsContainer>
   );

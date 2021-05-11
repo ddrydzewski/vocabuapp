@@ -4,8 +4,6 @@ export const getRandomIntNotTheSame = (max: number, lastNumber: number) => {
     do {
       rndNumber = Math.floor(Math.random() * Math.floor(max));
     } while (rndNumber === lastNumber);
-  } else {
-    rndNumber = 1;
   }
   return rndNumber;
 };

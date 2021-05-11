@@ -9,8 +9,8 @@ export const CardRandom = () => {
   const [lastNumber, setLastNumber] = useState(0);
   const [randomCard, setRandomCard] = useState({
     id: "",
-    plword: "",
     engword: "",
+    plword: "",
   });
 
   const setRndCard = () => {
@@ -19,8 +19,8 @@ export const CardRandom = () => {
       setLastNumber(randomNumber);
       setRandomCard({
         id: randomNumber.toString(),
-        plword: words[randomNumber].plword,
         engword: words[randomNumber].engword,
+        plword: words[randomNumber].plword,
       });
     }
   };
