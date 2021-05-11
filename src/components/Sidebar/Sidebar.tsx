@@ -1,6 +1,7 @@
-import { colors, Icon } from "precise-ui/dist/es6";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { firebaseApp } from "../../database/core";
+import { LinkStyled } from "../style";
 import { BoxElement, SidebarElements, SidebarStyled } from "./style";
 
 export const Sidebar = () => {
@@ -18,12 +19,11 @@ export const Sidebar = () => {
         <BoxElement>
           <NavLink to="/test">Test</NavLink>
         </BoxElement>
-        <Icon
-          name="PowerSettingsNew"
-          color={colors.skyBlue2}
-          size={1.25}
-          onClick={handleLogout}
-        />
+        <LinkStyled onClick={handleLogout} >
+          <NavLink exact to="/">
+            Log out
+          </NavLink>
+        </LinkStyled>
       </SidebarElements>
     </SidebarStyled>
   );

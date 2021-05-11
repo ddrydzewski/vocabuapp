@@ -12,7 +12,7 @@ type Action =
   | {
       type: "updateWordsCollection";
       payload: firebase.firestore.CollectionReference<IWordsFirebase>;
-    };
+    }
 
 type Dispatch = (action: Action) => void;
 

@@ -1,6 +1,5 @@
 import {
   BodyText,
-
   colors,
   InputChangeEvent
 } from "precise-ui/dist/es6";

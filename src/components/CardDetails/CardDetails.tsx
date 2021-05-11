@@ -6,10 +6,10 @@ import { IWords } from "../../types/IWords";
 import { CardContainer, IconContainer, WordContainer } from "./style";
 
 interface IProps {
-  words: IWords;
+  card: IWords;
 }
 
-export const CardDetails: React.FC<IProps> = ({ words }) => {
+export const CardDetails: React.FC<IProps> = ({ card }) => {
   const dispatch = useAppDispatch();
   const [cardSide, setCardSide] = useState(false);
   const { wordsCollection } = useAppState();
@@ -19,7 +19,7 @@ export const CardDetails: React.FC<IProps> = ({ words }) => {
   };
 
   const onDelete = () => {
-    deleteWords(words.id, wordsCollection);
+    deleteWords(card.id, wordsCollection);
   };
 
   const confirmDelete = () => {
@@ -27,7 +27,7 @@ export const CardDetails: React.FC<IProps> = ({ words }) => {
   };
 
   const onEdit = () => {
-    dispatch({ type: "updateModalCard", payload: words });
+    dispatch({ type: "updateModalCard", payload: card });
     dispatch({ type: "updateIsModalOpen", payload: true });
     dispatch({ type: "updateIsEditMode", payload: true });
   };
@@ -35,7 +35,7 @@ export const CardDetails: React.FC<IProps> = ({ words }) => {
   return (
     <>
       <CardContainer onClick={cardSideClick}>
-        <WordContainer>{cardSide ? words.engword : words.plword}</WordContainer>
+        <WordContainer>{cardSide ? card.engword : card.plword}</WordContainer>
         <IconContainer>
           <IconLink icon="Create" onClick={onEdit}></IconLink>
           <IconLink icon="Delete" onClick={confirmDelete}></IconLink>

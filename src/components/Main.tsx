@@ -17,38 +17,30 @@ interface IProps {
 }
 
 export const Main: React.FC<IProps> = ({ userID }) => {
-  const { wordsCollection, isFetched} = useAppState();
+  const { isFetched } = useAppState();
   const [isFinish, setIsFinish] = React.useState(false);
   const [words, setWords] = React.useState<IWords[]>([]);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setIsFinish(isFetched);
-    console.log(isFinish);
-
-    dispatch({ type: "updateWords", payload: words });
-  }, [dispatch, isFetched, isFinish, words]);
-
-  useEffect(() => {
     (async function () {
-      setCollection().then(getWords);
+      initFirestore();
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setCollection = async () => {
-    const collection = await getCollection(userID);
-    dispatch({ type: "updateWordsCollection", payload: collection });
-  };
+  useEffect(() => {
+    setIsFinish(isFetched);
+    dispatch({ type: "updateWords", payload: words });
+  }, [dispatch, isFetched, words]);
 
-  const getWords = async () => {
-    if (wordsCollection) {
-      const data = await useQueryWords(wordsCollection);
-      dispatch({ type: "updateWords", payload: data });
-      dispatch({ type: "updateIsFetched", payload: true });
-      setWords(data);
-      console.log(data);
-    }
+  const initFirestore = async () => {
+    const collection = await getCollection(userID);
+    const data = await useQueryWords(collection);
+    dispatch({ type: "updateWords", payload: data });
+    dispatch({ type: "updateWordsCollection", payload: collection });
+    dispatch({ type: "updateIsFetched", payload: true });
+    setWords(data);
   };
 
   return (

@@ -37,7 +37,7 @@ export const Cards = () => {
         {words &&
           words
             .slice(bottom * cardMaxNumber, top * cardMaxNumber)
-            .map((words) => <CardDetails key={words.id} words={words} />)}
+            .map((words) => <CardDetails key={words.id} card={words} />)}
       </CardsContainer>
       {isModalOpen && <CardModal />}
       <AddButton onClick={handleModalOpen}><Icon name="Add"/></AddButton>
