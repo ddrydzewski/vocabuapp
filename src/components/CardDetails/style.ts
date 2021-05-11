@@ -5,9 +5,9 @@ export const CardContainer = styled.div`
   border-radius: 5px;
   text-align: center;
   justify-content: center;
-  padding-top:6%;
   height: 100px;
   margin: auto;
+  padding-top: 5%;
   margin-top: 12px;
   margin-left:18px; 
   margin-bottom: 1rem;
@@ -25,6 +25,8 @@ export const CardContainer = styled.div`
 
 export const WordContainer = styled.div`
   font-size: 25px;
+  text-align: center;
+  justify-content: center;
   font-weight: bold;
   color: #05386b;
   display: block;

@@ -7,7 +7,7 @@ export const Starter = () => {
   return (
     <StartText>
       <h1>Learning with Vocabu</h1>
-      <h2>Its easy and simple</h2>
+      <h2>easy and simple</h2>
       <StartButton>
         <LinkStyled>
           <NavLink to="/words">Get Started</NavLink>
