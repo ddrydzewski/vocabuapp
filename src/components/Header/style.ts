@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { colors } from "../../design/colorStyles/colorStyles";
 
 export const HeaderContainer = styled.div`
-  background-color: #05386b;
+  background-color: ${colors.bonusColor};
   font-family: sans-serif;
   font-size: 50px;
   width: 100%;

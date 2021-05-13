@@ -1,8 +1,4 @@
-import {
-  BodyText,
-
-  InputChangeEvent
-} from "precise-ui/dist/es6";
+import { BodyText, InputChangeEvent } from "precise-ui/dist/es6";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import ReactModal from "react-modal";
@@ -24,7 +20,13 @@ export const emptyCard: IWordsFirebase = {
 };
 
 export const CardModal: React.FC = () => {
-  const { isModalOpen, isEditMode, modalCard, words, wordsCollection } = useAppState();
+  const {
+    isModalOpen,
+    isEditMode,
+    modalCard,
+    words,
+    wordsCollection,
+  } = useAppState();
   const [card, setCard] = useState<IWordsFirebase>(emptyCard);
   const dispatch = useAppDispatch();
 
@@ -36,7 +38,7 @@ export const CardModal: React.FC = () => {
     const duplicate = words && checkDuplicate(words, card.engword);
     if (!duplicate || isEditMode) {
       !isEditMode ? addSubmit() : editSubmit();
-    }else {
+    } else {
       alert("This word already exist");
     }
     setCard(emptyCard);
@@ -81,8 +83,9 @@ export const CardModal: React.FC = () => {
         <StyledTextFieldWrapper>
           <StyledTextField
             maxLength={30}
-            type="string"
+            type="text"
             name="engword"
+            autoFocus={true}
             onChange={handleOnChange}
             value={card.engword}
             label="English"
@@ -91,7 +94,7 @@ export const CardModal: React.FC = () => {
         <StyledTextFieldWrapper>
           <StyledTextField
             maxLength={30}
-            type="string"
+            type="text"
             name="plword"
             onChange={handleOnChange}
             value={card.plword}
@@ -100,13 +103,10 @@ export const CardModal: React.FC = () => {
         </StyledTextFieldWrapper>
       </div>
       <StyledActions>
-        <Button 
-          onClick={handleOnClose}
-          variant="danger"
-        >
+        <Button onClick={handleOnClose} variant="danger" style={{marginRight: "3px"}}>
           Cancel
         </Button>
-        <Button onClick={onSubmit} variant="succes">
+        <Button onClick={onSubmit} variant="success">
           {isEditMode ? "Edit" : "Add"}
         </Button>
       </StyledActions>
