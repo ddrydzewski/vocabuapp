@@ -1,5 +1,4 @@
 import { styled } from "precise-ui";
-import { ButtonScheme } from "../style";
 
 export const CardsContainer = styled.div`
   margin-left: 8%;
@@ -14,15 +13,6 @@ export const CardsContainer = styled.div`
   border: 8px solid #05386b;
   border-radius: 5px;
   overflow-y: auto;
-`;
-
-export const AddButton = styled(ButtonScheme)`
-  margin: auto;
-  margin-top: 3px;
-  text-align: center;
-  justify-content: center;
-  padding: 8px;
-  display: flex;
 `;
 
 export const Icons = styled.div`

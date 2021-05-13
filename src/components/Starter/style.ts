@@ -1,5 +1,4 @@
 import { styled } from "precise-ui";
-import { ButtonScheme } from "../style";
 
 export const StartText = styled.div`
   margin: auto;
@@ -11,8 +10,4 @@ export const StartText = styled.div`
   font-family: sans-serif;
   font-size: 40px;
   color: #edf5e1;
-`;
-
-export const StartButton = styled(ButtonScheme)`
-  font-size: 45px;
 `;

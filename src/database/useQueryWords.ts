@@ -7,6 +7,7 @@ export const useQueryWords = async (
 ) => {
   const result: IWords[] = [];
   wordsCollection.onSnapshot((snapshot) => {
+    result.length = 0;
     snapshot.forEach((doc) => {
       const item = doc.data();
       const word = { ...item, id: doc.id };

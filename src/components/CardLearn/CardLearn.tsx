@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useAppState } from "../../context/state";
-import emptyLogo from "../../icons/empty-512.png";
+import emptyLogo from "../../design/icons/empty-512.png";
 import { CardDetails } from "../CardDetails/CardDetails";
-import { TestsButton, TestsContainer } from "../CardRandom/style";
+import { TestsContainer } from "../CardRandom/style";
 
 export const CardLearn = () => {
   const { words } = useAppState();
@@ -25,9 +26,9 @@ export const CardLearn = () => {
       ) : (
         <img src={emptyLogo} alt="fireSpot"></img>
       )}
-      <TestsButton disabled={isWords} onClick={handleNextCard}>
+      <Button variant="primary" disabled={isWords} onClick={handleNextCard}>
         Next Card
-      </TestsButton>
+      </Button>
     </TestsContainer>
   );
 };

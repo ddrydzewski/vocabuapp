@@ -1,5 +1,6 @@
 import { Container } from "precise-ui/dist/es6";
 import styled from "styled-components";
+import { colors } from "../../design/colorStyles/colorStyles";
 import { LinkStyled } from "../style";
 
 export const SidebarStyled = styled(Container)`
@@ -7,7 +8,7 @@ export const SidebarStyled = styled(Container)`
   height: 90vh;
   flex: 1;
   display: flex;
-  background: #379683;
+  background-color: ${colors.thirdColor};
   color: black;
 `;
 

@@ -1,16 +1,16 @@
 import {
   BodyText,
-  colors,
+
   InputChangeEvent
 } from "precise-ui/dist/es6";
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import ReactModal from "react-modal";
 import { useAppDispatch, useAppState } from "../../context/state";
 import { addWords } from "../../database/add";
 import { editWords } from "../../database/edit";
 import { IWordsFirebase } from "../../types/IWordsFirebase";
 import { checkDuplicate } from "../../utilts/checkDuplicate";
-import { ButtonScheme } from "../style";
 import {
   ModalStyles,
   StyledActions,
@@ -100,16 +100,15 @@ export const CardModal: React.FC = () => {
         </StyledTextFieldWrapper>
       </div>
       <StyledActions>
-        <ButtonScheme
-          type="button"
+        <Button 
           onClick={handleOnClose}
-          style={{ background: colors.grey1 }}
+          variant="danger"
         >
           Cancel
-        </ButtonScheme>
-        <ButtonScheme onClick={onSubmit} style={{ background: '#05386B' }}>
+        </Button>
+        <Button onClick={onSubmit} variant="succes">
           {isEditMode ? "Edit" : "Add"}
-        </ButtonScheme>
+        </Button>
       </StyledActions>
     </ReactModal>
   );
