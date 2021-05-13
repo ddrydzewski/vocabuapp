@@ -1,4 +1,5 @@
 import { styled } from "precise-ui";
+import { colors } from "../../design/colorStyles/colorStyles";
 
 export const CardsContainer = styled.div`
   margin-left: 8%;
@@ -9,7 +10,7 @@ export const CardsContainer = styled.div`
   height: 70vh;
   left: 0;
   right: 0;
-  background-color: #379683;
+  background-color: ${colors.thirdColor};
   border: 8px solid #05386b;
   border-radius: 5px;
   overflow-y: auto;
