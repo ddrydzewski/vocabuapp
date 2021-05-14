@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { useAppDispatch, useAppState } from "../../context/state";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { CardModal } from "../CardModal/CardModal";
-import { CardsContainer, Icons } from "./style";
+import { AddButtonContainer, CardsContainer, Icons } from "./style";
 
 export const Cards = () => {
   const { words, isModalOpen } = useAppState();
@@ -41,9 +41,11 @@ export const Cards = () => {
             .map((words) => <CardDetails key={words.id} card={words} />)}
       </CardsContainer>
       {isModalOpen && <CardModal />}
-      <Button variant="secondary" onClick={handleModalOpen}>
-        <Icon name="Add" />
-      </Button>
+      <AddButtonContainer>
+        <Button variant="success" onClick={handleModalOpen}>
+          <Icon name="Add" />
+        </Button>
+      </AddButtonContainer>
       {words && words?.length > cardMaxNumber && (
         <Icons>
           <Icon

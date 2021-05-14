@@ -10,6 +10,10 @@ export const CardsContainer = styled.div`
   border-radius: 5px;
   overflow-y: auto;
 `;
+export const AddButtonContainer = styled.div`
+  justify-content: center;
+  text-align: center;
+`;
 
 export const Icons = styled.div`
   cursor: pointer;
@@ -19,20 +23,3 @@ export const Icons = styled.div`
   font-size: 20px;
   text-align: center;
 `;
-
-
-
-// export const CardsContainer = styled.div`
-//   margin-left: 8%;
-//   margin-top: 1%;
-//   justify-content: center;
-//   flex-direction: column;
-//   width: 80%;
-//   height: 70vh;
-//   left: 0;
-//   right: 0;
-//   background-color: ${colors.secondaryColor};
-//   border: 6px solid ${colors.darkColor};
-//   border-radius: 5px;
-//   overflow-y: auto;
-// `;
