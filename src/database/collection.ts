@@ -1,16 +1,18 @@
 import firebase from "firebase";
 import { IWordsFirebase } from "../types/IWordsFirebase";
 import { getDate } from "../utilts/getDate";
-import { firestoreDB } from "./core";
+import { firebaseApp, firestoreDB } from "./core";
 
-export const getCollection = async (userID: string) => {
+export const getCollection = async () => {
   const helpWordsColletion = () => {
-    return getWordsCollection(userID);
+    return getWordsCollection();
   };
-  return await checkExistsCollection(userID).then(helpWordsColletion);
+  return await checkExistsCollection().then(helpWordsColletion);
 };
 
-const checkExistsCollection = async (userID: string) => {
+const checkExistsCollection = async () => {
+  const userID = firebaseApp.auth().currentUser?.uid;
+
   firestoreDB
     .collection("userData")
     .doc(userID)
@@ -33,7 +35,9 @@ const checkExistsCollection = async (userID: string) => {
     });
 };
 
-const getWordsCollection = async (userID: string) => {
+const getWordsCollection = async () => {
+  const userID = firebaseApp.auth().currentUser?.uid;
+
   return firestoreDB
     .collection("userData")
     .doc(userID)

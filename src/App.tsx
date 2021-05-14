@@ -20,14 +20,7 @@ function App() {
 
   return (
     <>
-      {user ? (
-        <Main
-          userID={user.uid}
-          userName={user.displayName ? user.displayName : "Hey"}
-        />
-      ) : (
-        <SignIn />
-      )}
+      {user ? <Main /> : <SignIn />}
       {isLoading && <LoadingSpinner />}
     </>
   );

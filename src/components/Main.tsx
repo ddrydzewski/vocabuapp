@@ -10,12 +10,7 @@ import { LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";
 import { Routes } from "./Routes/Routes";
 import { TopNavbar } from "./TopNavbar/TopNavbar";
 
-interface IProps {
-  userID: string;
-  userName: string;
-}
-
-export const Main: React.FC<IProps> = ({ userID , userName}) => {
+export const Main = () => {
   const { isFetched } = useAppState();
   const [isFinish, setIsFinish] = React.useState(false);
   const [words, setWords] = React.useState<IWords[]>([]);
@@ -34,7 +29,7 @@ export const Main: React.FC<IProps> = ({ userID , userName}) => {
   }, [dispatch, isFetched, words]);
 
   const initFirestore = async () => {
-    const collection = await getCollection(userID);
+    const collection = await getCollection();
     const data = await useQueryWords(collection);
     dispatch({ type: "updateWords", payload: data });
     dispatch({ type: "updateWordsCollection", payload: collection });
@@ -46,7 +41,7 @@ export const Main: React.FC<IProps> = ({ userID , userName}) => {
     <>
       {isFinish ? (
         <HashRouter>
-          <TopNavbar userName={userName} />
+          <TopNavbar />
           <Routes />
         </HashRouter>
       ) : (

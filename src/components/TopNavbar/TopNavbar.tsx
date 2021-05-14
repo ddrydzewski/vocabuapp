@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Badge, Button, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { firebaseApp } from "../../database/core";
 
-interface IProps {
-  userName: string;
-}
-
-export const TopNavbar: React.FC<IProps> = ({ userName }) => {
+export const TopNavbar = () => {
   const handleLogout = () => firebaseApp.auth().signOut();
+  const [userName, setUserName] = useState<string | undefined | null>("Hey buddy");
+
+  useEffect(() => {
+    setUserName(firebaseApp.auth().currentUser?.displayName);
+  }, [])
 
   return (
     <Navbar bg="light" expand="lg">
