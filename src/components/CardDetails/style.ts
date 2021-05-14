@@ -1,18 +1,20 @@
 import { styled } from "precise-ui";
+import { colors } from "../../design/colorStyles/colorStyles";
 
 export const CardContainer = styled.div`
-  background: #edf5e1;
+  background-color: ${colors.primeColor};
   border-radius: 5px;
   text-align: center;
   justify-content: center;
-  height: 100px;
+  height: 125px;
   margin: auto;
-  padding-top: 5%;
+  padding-top: 3%;
   margin-top: 12px;
   margin-left:18px; 
   margin-bottom: 1rem;
   margin-right: 1rem;
   display: inline-block;
+  background-image: url("../../design/backgrounds/gray-lines.png");
   width: 250px;
   cursor: pointer;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.12), 0 3px 4px rgba(0, 0, 0, 0.24);

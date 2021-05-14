@@ -1,16 +1,12 @@
-import {
-  BodyText,
-  colors,
-  InputChangeEvent
-} from "precise-ui/dist/es6";
+import { BodyText, InputChangeEvent } from "precise-ui/dist/es6";
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import ReactModal from "react-modal";
 import { useAppDispatch, useAppState } from "../../context/state";
 import { addWords } from "../../database/add";
 import { editWords } from "../../database/edit";
 import { IWordsFirebase } from "../../types/IWordsFirebase";
 import { checkDuplicate } from "../../utilts/checkDuplicate";
-import { ButtonScheme } from "../style";
 import {
   ModalStyles,
   StyledActions,
@@ -24,7 +20,13 @@ export const emptyCard: IWordsFirebase = {
 };
 
 export const CardModal: React.FC = () => {
-  const { isModalOpen, isEditMode, modalCard, words, wordsCollection } = useAppState();
+  const {
+    isModalOpen,
+    isEditMode,
+    modalCard,
+    words,
+    wordsCollection,
+  } = useAppState();
   const [card, setCard] = useState<IWordsFirebase>(emptyCard);
   const dispatch = useAppDispatch();
 
@@ -36,7 +38,7 @@ export const CardModal: React.FC = () => {
     const duplicate = words && checkDuplicate(words, card.engword);
     if (!duplicate || isEditMode) {
       !isEditMode ? addSubmit() : editSubmit();
-    }else {
+    } else {
       alert("This word already exist");
     }
     setCard(emptyCard);
@@ -81,8 +83,9 @@ export const CardModal: React.FC = () => {
         <StyledTextFieldWrapper>
           <StyledTextField
             maxLength={30}
-            type="string"
+            type="text"
             name="engword"
+            autoFocus={true}
             onChange={handleOnChange}
             value={card.engword}
             label="English"
@@ -91,7 +94,7 @@ export const CardModal: React.FC = () => {
         <StyledTextFieldWrapper>
           <StyledTextField
             maxLength={30}
-            type="string"
+            type="text"
             name="plword"
             onChange={handleOnChange}
             value={card.plword}
@@ -100,16 +103,12 @@ export const CardModal: React.FC = () => {
         </StyledTextFieldWrapper>
       </div>
       <StyledActions>
-        <ButtonScheme
-          type="button"
-          onClick={handleOnClose}
-          style={{ background: colors.grey1 }}
-        >
+        <Button onClick={handleOnClose} variant="danger" style={{marginRight: "3px"}}>
           Cancel
-        </ButtonScheme>
-        <ButtonScheme onClick={onSubmit} style={{ background: '#05386B' }}>
+        </Button>
+        <Button onClick={onSubmit} variant="success">
           {isEditMode ? "Edit" : "Add"}
-        </ButtonScheme>
+        </Button>
       </StyledActions>
     </ReactModal>
   );

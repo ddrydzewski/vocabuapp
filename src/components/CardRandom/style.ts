@@ -1,5 +1,4 @@
 import { styled } from "precise-ui";
-import { ButtonScheme } from "../style";
 
 export const TestsContainer = styled.div`
   margin: auto;
@@ -12,11 +11,11 @@ export const TestsContainer = styled.div`
   padding: 15px;
 `;
 
-export const TestsButton = styled(ButtonScheme)`
-  margin-top: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-`;
+// export const TestsButton = styled(Button)`
+//   margin-top: 150px;
+//   margin-left: auto;
+//   margin-right: auto;
+//   left: 0;
+//   right: 0;
+//   text-align: center;
+// `;

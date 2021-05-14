@@ -1,10 +1,11 @@
 import { Icon } from "precise-ui/dist/es6";
 import * as React from "react";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 import { useAppDispatch, useAppState } from "../../context/state";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { CardModal } from "../CardModal/CardModal";
-import { AddButton, CardsContainer, Icons } from "./style";
+import { CardsContainer, Icons } from "./style";
 
 export const Cards = () => {
   const { words, isModalOpen } = useAppState();
@@ -30,7 +31,7 @@ export const Cards = () => {
       setTop(top - 1);
     }
   };
-  
+
   return (
     <>
       <CardsContainer>
@@ -40,12 +41,24 @@ export const Cards = () => {
             .map((words) => <CardDetails key={words.id} card={words} />)}
       </CardsContainer>
       {isModalOpen && <CardModal />}
-      <AddButton onClick={handleModalOpen}><Icon name="Add"/></AddButton>
-      <Icons>
-        <Icon name="KeyboardArrowLeft" onClick={handlePrevCards} size={3.5}></Icon>
-        {top}
-        <Icon name="KeyboardArrowRight" onClick={handleNextCards} size={3.5}></Icon>
-      </Icons>
+      <Button variant="secondary" onClick={handleModalOpen}>
+        <Icon name="Add" />
+      </Button>
+      {words && words?.length > cardMaxNumber && (
+        <Icons>
+          <Icon
+            name="KeyboardArrowLeft"
+            onClick={handlePrevCards}
+            size={3.5}
+          ></Icon>
+          {top}
+          <Icon
+            name="KeyboardArrowRight"
+            onClick={handleNextCards}
+            size={3.5}
+          ></Icon>
+        </Icons>
+      )}
     </>
   );
 };

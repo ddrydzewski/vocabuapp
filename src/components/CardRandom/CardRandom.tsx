@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useAppState } from "../../context/state";
 import { getRandomIntNotTheSame } from "../../utilts/getRandomIntNotTheSame";
 import { CardDetails } from "../CardDetails/CardDetails";
-import { TestsButton, TestsContainer } from "./style";
+import { TestsContainer } from "./style";
 
 export const CardRandom = () => {
   const { words } = useAppState();
@@ -33,7 +34,7 @@ export const CardRandom = () => {
   return (
     <TestsContainer>
       {randomCard.id !== "" && <CardDetails card={randomCard} />}
-      <TestsButton disabled={isWords} onClick={setRndCard}>Random Card</TestsButton>
+      <Button variant="primary" disabled={isWords} onClick={setRndCard}>Random Card</Button>
     </TestsContainer>
   );
 };
