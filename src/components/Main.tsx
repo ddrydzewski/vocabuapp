@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Grid } from "precise-ui";
 import * as React from "react";
 import { useEffect } from "react";
 import { HashRouter } from "react-router-dom";
@@ -7,16 +6,16 @@ import { useAppDispatch, useAppState } from "../context/state";
 import { getCollection } from "../database/collection";
 import { useQueryWords } from "../database/useQueryWords";
 import { IWords } from "../types/IWords";
-import { Header } from "./Header/Header";
 import { LoadingSpinner } from "./LoadingSpinner/LoadingSpinner";
 import { Routes } from "./Routes/Routes";
-import { Sidebar } from "./Sidebar/Sidebar";
+import { TopNavbar } from "./TopNavbar/TopNavbar";
 
 interface IProps {
   userID: string;
+  userName: string;
 }
 
-export const Main: React.FC<IProps> = ({ userID }) => {
+export const Main: React.FC<IProps> = ({ userID , userName}) => {
   const { isFetched } = useAppState();
   const [isFinish, setIsFinish] = React.useState(false);
   const [words, setWords] = React.useState<IWords[]>([]);
@@ -47,11 +46,8 @@ export const Main: React.FC<IProps> = ({ userID }) => {
     <>
       {isFinish ? (
         <HashRouter>
-          <Header />
-          <Grid rows={1} columns={["15rem", "1fr"]}>
-            <Sidebar />
-            <Routes />
-          </Grid>
+          <TopNavbar userName={userName} />
+          <Routes />
         </HashRouter>
       ) : (
         <LoadingSpinner />

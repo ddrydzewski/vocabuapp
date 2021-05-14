@@ -1,14 +1,12 @@
 import { styled } from "precise-ui";
 
 export const CardsContainer = styled.div`
-  margin-left: 8%;
   margin-top: 1%;
+  margin: auto;
   justify-content: center;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   height: 70vh;
-  left: 0;
-  right: 0;
   border-radius: 5px;
   overflow-y: auto;
 `;

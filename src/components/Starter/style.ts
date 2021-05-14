@@ -1,5 +1,6 @@
 import { styled } from "precise-ui";
-
+import { colors } from "../../design/colorStyles/colorStyles";
+ 
 export const StartText = styled.div`
   margin: auto;
   margin-top: 15px;
@@ -8,6 +9,7 @@ export const StartText = styled.div`
   width: auto;
   text-align: center;
   font-family: sans-serif;
-  font-size: 40px;
-  color: #edf5e1;
+  font-size: 50px;
+  font-weight: bold;
+  color: ${colors.darkColor};
 `;

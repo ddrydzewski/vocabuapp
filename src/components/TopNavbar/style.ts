@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../design/colorStyles/colorStyles";
 
-export const HeaderContainer = styled.div`
+export const TopNavbarContainer = styled.div`
   background-color: ${colors.bonusColor};
   font-family: sans-serif;
   font-size: 50px;

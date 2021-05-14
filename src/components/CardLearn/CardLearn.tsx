@@ -29,6 +29,7 @@ export const CardLearn = () => {
       <Button variant="primary" disabled={isWords} onClick={handleNextCard}>
         Next Card
       </Button>
+      <div>{words && next + 1 + "/" + words?.length}</div>
     </TestsContainer>
   );
 };
