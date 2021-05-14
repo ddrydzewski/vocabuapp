@@ -1,8 +1,10 @@
 import firebase from "firebase";
-import { useEffect, useState } from "react";
-import { SignIn } from "./components/Auth/SignIn";
+import React, { useEffect, useState } from "react";
+import { HashRouter } from "react-router-dom";
 import { LoadingSpinner } from "./components/LoadingSpinner/LoadingSpinner";
-import { Main } from "./components/Main";
+import { Logged } from "./components/Logged/Logged";
+import { Routes } from "./components/Routes/Routes";
+import { TopNavbar } from "./components/TopNavbar/TopNavbar";
 
 function App() {
   const [user, setUser] = useState<firebase.User | null>(null);
@@ -20,7 +22,11 @@ function App() {
 
   return (
     <>
-      {user ? <Main /> : <SignIn />}
+      <HashRouter>
+        <TopNavbar />
+        <Routes />
+      </HashRouter>
+      {user && <Logged />}
       {isLoading && <LoadingSpinner />}
     </>
   );
