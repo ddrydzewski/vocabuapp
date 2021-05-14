@@ -79,7 +79,11 @@ export const CardModal: React.FC = () => {
       onRequestClose={handleOnClose}
     >
       <div>
-        <BodyText>Add your card</BodyText>
+        {isEditMode ? (
+          <BodyText>Edit your card</BodyText>
+        ) : (
+          <BodyText>Add your card</BodyText>
+        )}
         <StyledTextFieldWrapper>
           <StyledTextField
             maxLength={30}
@@ -103,7 +107,11 @@ export const CardModal: React.FC = () => {
         </StyledTextFieldWrapper>
       </div>
       <StyledActions>
-        <Button onClick={handleOnClose} variant="danger" style={{marginRight: "3px"}}>
+        <Button
+          onClick={handleOnClose}
+          variant="danger"
+          style={{ marginRight: "3px" }}
+        >
           Cancel
         </Button>
         <Button onClick={onSubmit} variant="success">
