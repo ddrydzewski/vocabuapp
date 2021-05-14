@@ -1,35 +1,68 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, ButtonGroup, ToggleButton } from "react-bootstrap";
 import { useAppState } from "../../context/state";
-import emptyLogo from "../../design/icons/empty-512.png";
+import { getRandomIntNotTheSame } from "../../utilts/getRandomIntNotTheSame";
 import { CardDetails } from "../CardDetails/CardDetails";
-import { TestsContainer } from "../CardRandom/style";
+import { CardModal } from "../CardModal/CardModal";
+import { TestsContainer } from "./style";
+
+const mode = [
+  { name: "In order", value: "1" },
+  { name: "Random", value: "2" },
+];
 
 export const CardLearn = () => {
-  const { words } = useAppState();
+  const { words, isModalOpen } = useAppState();
   const [next, setNext] = useState(0);
-  const [isWords, setIsWords] = useState(true);
+  const [lastNumber, setLastNumber] = useState(0);
+  const [radioValue, setRadioValue] = useState("1");
 
-  useEffect(() => {
-    words && words?.length > 0 ? setIsWords(false) : setIsWords(true);
-  }, [words]);
-
-  const handleNextCard = () => {
+  const setCard = () => {
     if (words && next < words.length - 1) setNext(next + 1);
     else setNext(0);
   };
 
+  const setRandomCard = () => {
+    if (words) {
+      const randomNumber = getRandomIntNotTheSame(words.length, lastNumber);
+      setLastNumber(randomNumber);
+      setNext(randomNumber);
+    }
+  };
+
+  const handleNextCard = () => {
+    radioValue === "1" ? setCard() : setRandomCard();
+  };
+
   return (
     <TestsContainer>
-      {!isWords && words ? (
-        <CardDetails card={words[next]} />
-      ) : (
-        <img src={emptyLogo} alt="fireSpot"></img>
-      )}
-      <Button variant="primary" disabled={isWords} onClick={handleNextCard}>
-        Next Card
-      </Button>
+      {isModalOpen && <CardModal />}
       <div>{words && next + 1 + "/" + words?.length}</div>
+      {words && words?.length > 0 && <CardDetails card={words[next]} />}
+      <Button
+        variant="primary"
+        disabled={!(words && words?.length > 0)}
+        onClick={handleNextCard}
+      >
+        Next
+      </Button>
+      <div>
+        <ButtonGroup toggle>
+          {mode.map((radio, idx) => (
+            <ToggleButton
+              key={idx}
+              type="radio"
+              variant="secondary"
+              name="radio"
+              value={radio.value}
+              checked={radioValue === radio.value}
+              onChange={(e) => setRadioValue(e.currentTarget.value)}
+            >
+              {radio.name}
+            </ToggleButton>
+          ))}
+        </ButtonGroup>
+      </div>
     </TestsContainer>
   );
 };

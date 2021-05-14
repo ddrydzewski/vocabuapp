@@ -3,7 +3,6 @@ import { Route } from "react-router-dom";
 import { firebaseApp } from "../../database/core";
 import { SignIn } from "../Auth/SignIn";
 import { CardLearn } from "../CardLearn/CardLearn";
-import { CardRandom } from "../CardRandom/CardRandom";
 import { Cards } from "../Cards/Cards";
 import { Starter } from "../Starter/Starter";
 
@@ -15,8 +14,7 @@ export const Routes = () => {
         <div>
           <Route exact path="/" component={Starter} />
           <Route path="/words" component={Cards} />
-          <Route path="/random" component={CardRandom} />
-          <Route path="/test" component={CardLearn} />
+          <Route path="/learn" component={CardLearn} />
         </div>
       ) : (
         <div>

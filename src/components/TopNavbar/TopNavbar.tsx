@@ -26,8 +26,7 @@ export const TopNavbar = () => {
           <Nav className="mr-auto" style={{ marginLeft: "15px" }}>
             <Nav.Link href="#words">Words</Nav.Link>
             <NavDropdown title="Vocabu Games" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#test">Learn</NavDropdown.Item>
-              <NavDropdown.Item href="#random">Random</NavDropdown.Item>
+              <NavDropdown.Item href="#learn">Learn</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Form inline>
