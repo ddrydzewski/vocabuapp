@@ -23,3 +23,10 @@ export const Icons = styled.div`
   font-size: 20px;
   text-align: center;
 `;
+
+export const CardsPageNumber = styled.div`
+  font-size: 40px;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-right: 20px;
+`;

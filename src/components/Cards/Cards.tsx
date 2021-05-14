@@ -5,7 +5,12 @@ import { Button } from "react-bootstrap";
 import { useAppDispatch, useAppState } from "../../context/state";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { CardModal } from "../CardModal/CardModal";
-import { AddButtonContainer, CardsContainer, Icons } from "./style";
+import {
+  AddButtonContainer,
+  CardsContainer,
+  CardsPageNumber,
+  Icons
+} from "./style";
 
 export const Cards = () => {
   const { words, isModalOpen } = useAppState();
@@ -53,7 +58,7 @@ export const Cards = () => {
             onClick={handlePrevCards}
             size={3.5}
           ></Icon>
-          {top}
+          <CardsPageNumber>{top}</CardsPageNumber>
           <Icon
             name="KeyboardArrowRight"
             onClick={handleNextCards}
