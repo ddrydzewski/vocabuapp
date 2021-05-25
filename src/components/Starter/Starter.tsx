@@ -7,14 +7,12 @@ export const Starter = () => {
   return (
     <StartText>
       <Jumbotron>
-        <h1>Hello, world!</h1>
+        <h1>Vocabu</h1>
+        <h2>Simple flashcards</h2>
+        <br/>
+        <p>Check it now</p>
         <p>
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
-        <p>
-          {!(firebaseApp.auth().currentUser)  &&
-          (
+          {!firebaseApp.auth().currentUser && (
             <Button variant="primary" href="#/signin">
               Sign in
             </Button>

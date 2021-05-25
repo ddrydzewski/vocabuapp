@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Badge, Button, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { firebaseApp } from "../../database/core";
 
 export const TopNavbar = () => {
   const handleLogout = () => firebaseApp.auth().signOut();
-  const [userName, setUserName] = useState<string | undefined | null>(
-    "Hey buddy"
-  );
-
-  useEffect(() => {
-    setUserName(firebaseApp.auth().currentUser?.displayName);
-  }, []);
 
   return (
     <Navbar bg="light" expand="lg">
@@ -31,7 +24,7 @@ export const TopNavbar = () => {
           </Nav>
           <Form inline>
             <Badge style={{ marginRight: "15px" }} variant="secondary">
-              {userName}
+              {firebaseApp.auth().currentUser?.displayName}
             </Badge>
             <Button variant="outline-success" href="#/" onClick={handleLogout}>
               Log out

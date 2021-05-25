@@ -10,7 +10,7 @@ export const CardContainer = styled.div`
   margin: auto;
   padding-top: 3%;
   margin-top: 12px;
-  margin-left:18px; 
+  margin-left: 18px;
   margin-bottom: 1rem;
   margin-right: 1rem;
   display: inline-block;
@@ -41,3 +41,33 @@ export const IconContainer = styled.div`
   flex-shrink: 0;
   display: block;
 `;
+
+
+
+// &[wobble='1'] {
+//   -webkit-animation: flip-horizontal-bottom 0.4s
+//     cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+//   animation: flip-horizontal-bottom 0.4s
+//     cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+// }
+
+// @-webkit-keyframes flip-horizontal-bottom {
+//   0% {
+//     -webkit-transform: rotateX(0);
+//     transform: rotateX(0);
+//   }
+//   100% {
+//     -webkit-transform: rotateX(-180deg);
+//     transform: rotateX(-180deg);
+//   }
+// }
+// @keyframes flip-horizontal-bottom {
+//   0% {
+//     -webkit-transform: rotateX(0);
+//     transform: rotateX(0);
+//   }
+//   100% {
+//     -webkit-transform: rotateX(-180deg);
+//     transform: rotateX(-180deg);
+//   }
+// }

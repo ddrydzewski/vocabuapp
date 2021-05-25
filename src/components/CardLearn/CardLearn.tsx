@@ -39,13 +39,15 @@ export const CardLearn = () => {
       {isModalOpen && <CardModal />}
       <div>{words && next + 1 + "/" + words?.length}</div>
       {words && words?.length > 0 && <CardDetails card={words[next]} />}
-      <Button
-        variant="primary"
-        disabled={!(words && words?.length > 0)}
-        onClick={handleNextCard}
-      >
-        Next
-      </Button>
+      <div style={{marginBottom: "15px"}}>
+        <Button
+          variant="primary"
+          disabled={!(words && words?.length > 0)}
+          onClick={handleNextCard}
+        >
+          Next
+        </Button>
+      </div>
       <div>
         <ButtonGroup toggle>
           {mode.map((radio, idx) => (

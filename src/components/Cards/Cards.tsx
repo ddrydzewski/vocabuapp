@@ -1,7 +1,7 @@
 import { Icon } from "precise-ui/dist/es6";
 import * as React from "react";
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container, Row } from "react-bootstrap";
 import { useAppDispatch, useAppState } from "../../context/state";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { CardModal } from "../CardModal/CardModal";
@@ -40,14 +40,18 @@ export const Cards = () => {
   return (
     <>
       <CardsContainer>
-        {words &&
-          words
-            .slice(bottom * cardMaxNumber, top * cardMaxNumber)
-            .map((words) => <CardDetails key={words.id} card={words} />)}
+        <Container>
+          <Row>
+            {words &&
+              words
+                .slice(bottom * cardMaxNumber, top * cardMaxNumber)
+                .map((words) => <CardDetails key={words.id} card={words} />)}
+          </Row>
+        </Container>
       </CardsContainer>
       {isModalOpen && <CardModal />}
       <AddButtonContainer>
-        <Button variant="success" onClick={handleModalOpen}>
+        <Button variant="success" onClick={handleModalOpen} >
           <Icon name="Add" />
         </Button>
       </AddButtonContainer>

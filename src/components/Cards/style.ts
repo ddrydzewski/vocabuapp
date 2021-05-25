@@ -1,18 +1,46 @@
 import { styled } from "precise-ui";
 
 export const CardsContainer = styled.div`
-  margin-top: 1%;
   margin: auto;
+  margin-bottom: 15px;
   justify-content: center;
-  flex-direction: column;
   width: 100%;
   height: 70vh;
-  border-radius: 5px;
   overflow-y: auto;
 `;
+
 export const AddButtonContainer = styled.div`
   justify-content: center;
   text-align: center;
+  margin: auto;
+  width: 3%;
+
+  &:hover {
+    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)
+      both;
+    animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  }
+
+  @-webkit-keyframes scale-up-center {
+    0% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    100% {
+      -webkit-transform: scale(1.15);
+      transform: scale(1.15);
+    }
+  }
+  @keyframes scale-up-center {
+    0% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    100% {
+      -webkit-transform: scale(1.15);
+      transform: scale(1.15);
+    }
+  }
 `;
 
 export const Icons = styled.div`
