@@ -9,6 +9,7 @@ type Action =
   | { type: "updateIsEditMode"; payload: boolean }
   | { type: "updateModalCard"; payload: IWords }
   | { type: "updateIsFetched"; payload: boolean }
+  | { type: "updateIsTranslationSide"; payload: boolean }
   | {
       type: "updateWordsCollection";
       payload: firebase.firestore.CollectionReference<IWordsFirebase>;
@@ -22,6 +23,7 @@ type State = {
   isEditMode: boolean;
   modalCard?: IWords;
   isFetched: boolean;
+  isTranslationSide: boolean;
   wordsCollection?: firebase.firestore.CollectionReference<IWordsFirebase>;
 };
 type StateProviderProps = { children: React.ReactNode };
@@ -34,6 +36,7 @@ const initAppState: State = {
   isEditMode: false,
   isModalOpen: false,
   isFetched: false,
+  isTranslationSide: false,
 };
 
 function appStateReducer(state: State, action: Action) {
@@ -52,6 +55,9 @@ function appStateReducer(state: State, action: Action) {
     }
     case "updateIsFetched": {
       return { ...state, isFetched: action.payload };
+    }
+    case "updateIsTranslationSide": {
+      return { ...state, isTranslationSide: action.payload };
     }
     case "updateWordsCollection": {
       return { ...state, wordsCollection: action.payload };

@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { Button, ButtonGroup, ToggleButton } from "react-bootstrap";
-import { useAppState } from "../../context/state";
+import { useAppDispatch, useAppState } from "../../context/state";
 import { getRandomIntNotTheSame } from "../../utilts/getRandomIntNotTheSame";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { CardModal } from "../CardModal/CardModal";
 import { TestsContainer } from "./style";
 
-const mode = [
+const nextCardMode = [
   { name: "In order", value: "1" },
   { name: "Random", value: "2" },
 ];
 
 export const CardLearn = () => {
-  const { words, isModalOpen } = useAppState();
+  const { words, isModalOpen, isTranslationSide } = useAppState();
+  const dispatch = useAppDispatch();
   const [next, setNext] = useState(0);
   const [lastNumber, setLastNumber] = useState(0);
   const [radioValue, setRadioValue] = useState("1");
@@ -34,12 +35,16 @@ export const CardLearn = () => {
     radioValue === "1" ? setCard() : setRandomCard();
   };
 
+  const handleTranslationMode = () => {
+    dispatch({ type: "updateIsTranslationSide", payload: !isTranslationSide });
+  };
+
   return (
     <TestsContainer>
       {isModalOpen && <CardModal />}
       <div>{words && next + 1 + "/" + words?.length}</div>
       {words && words?.length > 0 && <CardDetails card={words[next]} />}
-      <div style={{marginBottom: "15px"}}>
+      <div style={{ marginBottom: "15px" }}>
         <Button
           variant="primary"
           disabled={!(words && words?.length > 0)}
@@ -50,11 +55,11 @@ export const CardLearn = () => {
       </div>
       <div>
         <ButtonGroup toggle>
-          {mode.map((radio, idx) => (
+          {nextCardMode.map((radio, idx) => (
             <ToggleButton
               key={idx}
               type="radio"
-              variant="secondary"
+              variant="outline-success"
               name="radio"
               value={radio.value}
               checked={radioValue === radio.value}
@@ -64,6 +69,11 @@ export const CardLearn = () => {
             </ToggleButton>
           ))}
         </ButtonGroup>
+      </div>
+      <div style={{ marginTop: "15px" }}>
+        <Button onClick={handleTranslationMode} variant="outline-dark">
+          {isTranslationSide ? "Polish" : "English"}
+        </Button>
       </div>
     </TestsContainer>
   );

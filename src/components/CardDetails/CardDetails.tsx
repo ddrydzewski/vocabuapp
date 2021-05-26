@@ -1,5 +1,5 @@
 import { IconLink } from "precise-ui/dist/es6";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppState } from "../../context/state";
 import { deleteWords } from "../../database/delete";
 import { IWords } from "../../types/IWords";
@@ -11,8 +11,16 @@ interface IProps {
 
 export const CardDetails: React.FC<IProps> = ({ card }) => {
   const dispatch = useAppDispatch();
-  const [cardSide, setCardSide] = useState(false);
-  const { wordsCollection } = useAppState();
+  const { wordsCollection, isTranslationSide } = useAppState();
+  const [cardSide, setCardSide] = useState(isTranslationSide);
+  const [cardID, setCardID] = useState<string>("");
+
+  useEffect(() => {
+    if (cardID !== card.id) {
+      setCardID(card.id);
+      setCardSide(isTranslationSide);
+    }
+  }, [card.id, cardID, isTranslationSide]);
 
   const cardSideClick = () => {
     setCardSide(!cardSide);
@@ -35,7 +43,7 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
   return (
     <>
       <CardContainer onClick={cardSideClick}>
-        <WordContainer>{cardSide ? card.engword : card.plword}</WordContainer>
+        <WordContainer>{cardSide ? card.plword : card.engword}</WordContainer>
         <IconContainer>
           <IconLink icon="Create" onClick={onEdit}></IconLink>
           <IconLink icon="Delete" onClick={confirmDelete}></IconLink>
@@ -44,3 +52,9 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
     </>
   );
 };
+
+// <DropdownButton id="dropdown-basic-button" variant="secondary" title="">
+// <Dropdown.Item href="#/action-1">Good</Dropdown.Item>
+// <Dropdown.Item href="#/action-2">Almost</Dropdown.Item>
+// <Dropdown.Item href="#/action-3">Learning</Dropdown.Item>
+// </DropdownButton>
