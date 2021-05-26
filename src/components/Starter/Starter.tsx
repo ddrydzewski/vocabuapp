@@ -9,13 +9,16 @@ export const Starter = () => {
       <Jumbotron>
         <h1>Vocabu</h1>
         <h2>Simple flashcards</h2>
-        <br/>
-        <p>Check it now</p>
+        <br />
         <p>
-          {!firebaseApp.auth().currentUser && (
+          {!firebaseApp.auth().currentUser ? (
             <Button variant="primary" href="#/signin">
               Sign in
             </Button>
+          ) : (
+            <div>
+              Welcome <b>{firebaseApp.auth().currentUser?.displayName}</b>
+            </div>
           )}
         </p>
       </Jumbotron>
