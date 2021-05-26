@@ -51,7 +51,7 @@ export const Cards = () => {
       </CardsContainer>
       {isModalOpen && <CardModal />}
       <AddButtonContainer>
-        <Button variant="success" onClick={handleModalOpen} >
+        <Button variant="success" onClick={handleModalOpen}>
           <Icon name="Add" />
         </Button>
       </AddButtonContainer>
