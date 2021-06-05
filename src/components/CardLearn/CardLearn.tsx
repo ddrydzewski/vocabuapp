@@ -1,26 +1,34 @@
-import React, { useState } from "react";
-import { Button, ButtonGroup, ToggleButton } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, ButtonGroup } from "react-bootstrap";
 import { useAppDispatch, useAppState } from "../../context/state";
 import { getRandomIntNotTheSame } from "../../utilts/getRandomIntNotTheSame";
+import { useKey } from "../../utilts/useKey";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { CardModal } from "../CardModal/CardModal";
 import { TestsContainer } from "./style";
-
-const nextCardMode = [
-  { name: "In order", value: "1" },
-  { name: "Random", value: "2" },
-];
 
 export const CardLearn = () => {
   const { words, isModalOpen, isTranslationSide } = useAppState();
   const dispatch = useAppDispatch();
   const [next, setNext] = useState(0);
   const [lastNumber, setLastNumber] = useState(0);
-  const [radioValue, setRadioValue] = useState("1");
+  const [isRandomMode, setIsRandomMode] = useState(false);
+  const leftArrow = useKey("ArrowLeft");
+  const rightArrow = useKey("ArrowRight");
 
-  const setCard = () => {
-    if (words && next < words.length - 1) setNext(next + 1);
-    else setNext(0);
+  useEffect(() => {
+    if (leftArrow) handlePrevCard();
+    if (rightArrow) handleNextCard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [leftArrow, rightArrow]);
+
+  const setCard = (isForward: boolean) => {
+    if (!words) return;
+    if (isForward) {
+      next < words.length - 1 ? setNext(next + 1) : setNext(0);
+    } else {
+      next === 0 ? setNext(words.length - 1) : setNext(next - 1);
+    }
   };
 
   const setRandomCard = () => {
@@ -32,7 +40,11 @@ export const CardLearn = () => {
   };
 
   const handleNextCard = () => {
-    radioValue === "1" ? setCard() : setRandomCard();
+    isRandomMode ? setRandomCard() : setCard(true);
+  };
+
+  const handlePrevCard = () => {
+    !isRandomMode && setCard(false);
   };
 
   const handleTranslationMode = () => {
@@ -45,6 +57,16 @@ export const CardLearn = () => {
       <div>{words && next + 1 + "/" + words?.length}</div>
       {words && words?.length > 0 && <CardDetails card={words[next]} />}
       <div style={{ marginBottom: "15px" }}>
+        {!isRandomMode && (
+          <Button
+            style={{ marginRight: "5px" }}
+            variant="primary"
+            disabled={!(words && words?.length > 0)}
+            onClick={handlePrevCard}
+          >
+            Prev
+          </Button>
+        )}
         <Button
           variant="primary"
           disabled={!(words && words?.length > 0)}
@@ -54,20 +76,17 @@ export const CardLearn = () => {
         </Button>
       </div>
       <div>
-        <ButtonGroup toggle>
-          {nextCardMode.map((radio, idx) => (
-            <ToggleButton
-              key={idx}
-              type="radio"
-              variant="outline-success"
-              name="radio"
-              value={radio.value}
-              checked={radioValue === radio.value}
-              onChange={(e) => setRadioValue(e.currentTarget.value)}
-            >
-              {radio.name}
-            </ToggleButton>
-          ))}
+        <ButtonGroup>
+          <Button
+            style={{ marginRight: "5px" }}
+            variant="success"
+            onClick={(e) => setIsRandomMode(false)}
+          >
+            In order
+          </Button>
+          <Button variant="success" onClick={(e) => setIsRandomMode(true)}>
+            Random
+          </Button>
         </ButtonGroup>
       </div>
       <div style={{ marginTop: "15px" }}>

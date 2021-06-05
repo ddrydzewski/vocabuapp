@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppState } from "../../context/state";
 import { deleteWords } from "../../database/delete";
 import { IWords } from "../../types/IWords";
+import { useKey } from "../../utilts/useKey";
 import { CardContainer, IconContainer, WordContainer } from "./style";
 
 interface IProps {
@@ -14,13 +15,19 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
   const { wordsCollection, isTranslationSide } = useAppState();
   const [cardSide, setCardSide] = useState(isTranslationSide);
   const [cardID, setCardID] = useState<string>("");
-
+  const shift = useKey("Shift");
+  
   useEffect(() => {
     if (cardID !== card.id) {
       setCardID(card.id);
       setCardSide(isTranslationSide);
     }
   }, [card.id, cardID, isTranslationSide]);
+
+  useEffect(() => {
+    if (shift) cardSideClick();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shift]);
 
   const cardSideClick = () => {
     setCardSide(!cardSide);
@@ -52,6 +59,12 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
     </>
   );
 };
+
+
+
+
+
+
 
 // <DropdownButton id="dropdown-basic-button" variant="secondary" title="">
 // <Dropdown.Item href="#/action-1">Good</Dropdown.Item>
