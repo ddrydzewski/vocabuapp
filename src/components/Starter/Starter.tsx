@@ -1,19 +1,27 @@
 import React from "react";
-import { Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import { LinkStyled } from "../style";
+import { Button, Jumbotron } from "react-bootstrap";
+import { firebaseApp } from "../../database/core";
 import { StartText } from "./style";
 
 export const Starter = () => {
   return (
     <StartText>
-      <h1>Learning with Vocabu</h1>
-      <h2>easy and simple</h2>
-      <Button variant="secondary" size="lg">
-        <LinkStyled>
-          <NavLink to="/words">Get Started</NavLink>
-        </LinkStyled>
-      </Button>
+      <Jumbotron>
+        <h1>Vocabu</h1>
+        <h2>Simple flashcards</h2>
+        <br />
+        <p>
+          {!firebaseApp.auth().currentUser ? (
+            <Button variant="primary" href="#/signin">
+              Sign in
+            </Button>
+          ) : (
+            <div>
+              Welcome <b>{firebaseApp.auth().currentUser?.displayName}</b>
+            </div>
+          )}
+        </p>
+      </Jumbotron>
     </StartText>
   );
 };
