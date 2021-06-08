@@ -10,8 +10,11 @@ export const editWords = (
 ) => {
   wordsCollection
     ? wordsCollection.doc(words.id).set({
-        engword: words.engword,
-        plword: words.plword,
+      original: words.original,
+      translation: words.translation,
+      category: words.category,
+      level: words.level,
+      note: words.note
       })
     : console.log("edit words error");
 };

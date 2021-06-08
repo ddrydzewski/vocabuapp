@@ -9,8 +9,11 @@ export const addWords = (
 ) => {
   wordsCollection
     ? wordsCollection.add({
-        engword: words.engword,
-        plword: words.plword,
+        original: words.original,
+        translation: words.translation,
+        category: words.category,
+        level: words.level,
+        note: words.note,
       })
     : console.log("add words error");
 };

@@ -1,5 +1,8 @@
 export interface IWords {
     id: string,
-    engword: string;
-    plword: string;
+    original: string;
+    translation: string;
+    category: string;
+    level: string;
+    note?: string;
 }
