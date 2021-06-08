@@ -67,9 +67,3 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
     </>
   );
 };
-
-// <DropdownButton id="dropdown-basic-button" variant="secondary" title="">
-// <Dropdown.Item href="#/action-1">Good</Dropdown.Item>
-// <Dropdown.Item href="#/action-2">Almost</Dropdown.Item>
-// <Dropdown.Item href="#/action-3">Learning</Dropdown.Item>
-// </DropdownButton>
