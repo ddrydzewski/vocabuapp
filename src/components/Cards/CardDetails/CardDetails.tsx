@@ -1,9 +1,11 @@
-import { IconLink } from "precise-ui/dist/es6";
+import { Icon } from "precise-ui/dist/es6";
 import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppState } from "../../context/state";
-import { deleteWords } from "../../database/delete";
-import { IWords } from "../../types/IWords";
-import { useKey } from "../../utilts/useKey";
+import { useAppDispatch, useAppState } from "../../../context/state";
+import { deleteWords } from "../../../database/delete";
+import { IWords } from "../../../types/IWords";
+import { levelToBorderColor } from "../../../utilts/levelToBorderColor";
+import { useKey } from "../../../utilts/useKey";
+import { CardNote } from "../CardNote/CardNote";
 import { CardContainer, IconContainer, WordContainer } from "./style";
 
 interface IProps {
@@ -16,7 +18,7 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
   const [cardSide, setCardSide] = useState(isTranslationSide);
   const [cardID, setCardID] = useState<string>("");
   const shift = useKey("Shift");
-  
+
   useEffect(() => {
     if (cardID !== card.id) {
       setCardID(card.id);
@@ -49,22 +51,22 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
 
   return (
     <>
-      <CardContainer onClick={cardSideClick}>
-        <WordContainer>{cardSide ? card.plword : card.engword}</WordContainer>
+      <CardContainer
+        onClick={cardSideClick}
+        style={{ border: levelToBorderColor(card.level) }}
+      >
+        <WordContainer>
+          {cardSide ? card.translation : card.original}
+        </WordContainer>
         <IconContainer>
-          <IconLink icon="Create" onClick={onEdit}></IconLink>
-          <IconLink icon="Delete" onClick={confirmDelete}></IconLink>
+          <Icon name="Create" onClick={onEdit}></Icon>
+          <Icon name="Delete" onClick={confirmDelete}></Icon>
         </IconContainer>
+        {card.note && <CardNote note={card.note} />}
       </CardContainer>
     </>
   );
 };
-
-
-
-
-
-
 
 // <DropdownButton id="dropdown-basic-button" variant="secondary" title="">
 // <Dropdown.Item href="#/action-1">Good</Dropdown.Item>

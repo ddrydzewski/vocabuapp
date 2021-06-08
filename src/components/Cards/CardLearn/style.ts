@@ -7,6 +7,5 @@ export const TestsContainer = styled.div`
   width: 50%;
   text-align: center;
   font-family: sans-serif;
-  font-size: 25px;
   padding: 15px;
 `;

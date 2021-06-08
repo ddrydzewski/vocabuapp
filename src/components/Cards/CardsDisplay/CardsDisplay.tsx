@@ -2,7 +2,7 @@ import { Icon } from "precise-ui/dist/es6";
 import * as React from "react";
 import { useState } from "react";
 import { Button, Container, Row } from "react-bootstrap";
-import { useAppDispatch, useAppState } from "../../context/state";
+import { useAppDispatch, useAppState } from "../../../context/state";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { CardModal } from "../CardModal/CardModal";
 import {
@@ -12,7 +12,7 @@ import {
   Icons
 } from "./style";
 
-export const Cards = () => {
+export const CardsDisplay = () => {
   const { words, isModalOpen } = useAppState();
   const dispatch = useAppDispatch();
   const [top, setTop] = useState(1);
@@ -39,17 +39,6 @@ export const Cards = () => {
 
   return (
     <>
-      <CardsContainer>
-        <Container>
-          <Row>
-            {words &&
-              words
-                .slice(bottom * cardMaxNumber, top * cardMaxNumber)
-                .map((words) => <CardDetails key={words.id} card={words} />)}
-          </Row>
-        </Container>
-      </CardsContainer>
-      {isModalOpen && <CardModal />}
       <AddButtonContainer>
         <Button variant="success" onClick={handleModalOpen}>
           <Icon name="Add" />
@@ -70,6 +59,17 @@ export const Cards = () => {
           ></Icon>
         </Icons>
       )}
+      <CardsContainer>
+        <Container>
+          <Row>
+            {words &&
+              words
+                .slice(bottom * cardMaxNumber, top * cardMaxNumber)
+                .map((words) => <CardDetails key={words.id} card={words} />)}
+          </Row>
+        </Container>
+      </CardsContainer>
+      {isModalOpen && <CardModal />}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { styled } from "precise-ui";
-import { colors } from "../../design/colorStyles/colorStyles";
+import { colors } from "../../../design/colorStyles/colorStyles";
 
 export const CardContainer = styled.div`
   background-color: ${colors.primeColor};

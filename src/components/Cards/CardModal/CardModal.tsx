@@ -1,12 +1,14 @@
 import { BodyText, InputChangeEvent } from "precise-ui/dist/es6";
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Dropdown } from "react-bootstrap";
 import ReactModal from "react-modal";
-import { useAppDispatch, useAppState } from "../../context/state";
-import { addWords } from "../../database/add";
-import { editWords } from "../../database/edit";
-import { IWordsFirebase } from "../../types/IWordsFirebase";
-import { checkDuplicate } from "../../utilts/checkDuplicate";
+import { useAppDispatch, useAppState } from "../../../context/state";
+import { addWords } from "../../../database/add";
+import { editWords } from "../../../database/edit";
+import { uLevel } from "../../../enums/uLevel";
+import { IWordsFirebase } from "../../../types/IWordsFirebase";
+import { checkDuplicate } from "../../../utilts/checkDuplicate";
+import { numberToULevel } from "../../../utilts/numberToLevel";
 import {
   ModalStyles,
   StyledActions,
@@ -15,8 +17,11 @@ import {
 } from "./style";
 
 export const emptyCard: IWordsFirebase = {
-  engword: "",
-  plword: "",
+  original: "",
+  translation: "",
+  level: uLevel.low,
+  category: "all",
+  note: ""
 };
 
 export const CardModal: React.FC = () => {
@@ -35,7 +40,7 @@ export const CardModal: React.FC = () => {
   }, [modalCard, isEditMode]);
 
   const onSubmit = () => {
-    const duplicate = words && checkDuplicate(words, card.engword);
+    const duplicate = words && checkDuplicate(words, card.original);
     if (!duplicate || isEditMode) {
       !isEditMode ? addSubmit() : editSubmit();
     } else {
@@ -45,7 +50,7 @@ export const CardModal: React.FC = () => {
   };
 
   const editSubmit = () => {
-    if (card.engword !== null && card.plword !== null && modalCard) {
+    if (card.original !== null && card.translation !== null && modalCard) {
       const helpEditWords = { ...card, id: modalCard.id };
       editWords(helpEditWords, wordsCollection);
     } else {
@@ -54,7 +59,7 @@ export const CardModal: React.FC = () => {
   };
 
   const addSubmit = () => {
-    if (card.engword !== null && card.plword !== null && words) {
+    if (card.original !== null && card.translation !== null && words) {
       addWords(card, wordsCollection);
     } else {
       alert("Check all fields");
@@ -70,6 +75,10 @@ export const CardModal: React.FC = () => {
     const target = e.value;
     setCard({ ...card, [e.originalEvent?.target.name]: target });
   };
+
+  const handleCardULevel = (ulevel: string) => {
+    setCard({ ...card, level: ulevel });
+  }
 
   return (
     <ReactModal
@@ -88,23 +97,45 @@ export const CardModal: React.FC = () => {
           <StyledTextField
             maxLength={30}
             type="text"
-            name="engword"
+            name="original"
             autoFocus={true}
             onChange={handleOnChange}
-            value={card.engword}
-            label="English"
+            value={card.original}
+            label="Base"
           />
         </StyledTextFieldWrapper>
         <StyledTextFieldWrapper>
           <StyledTextField
             maxLength={30}
             type="text"
-            name="plword"
+            name="translation"
             onChange={handleOnChange}
-            value={card.plword}
-            label="Polish"
+            value={card.translation}
+            label="Translation"
           />
         </StyledTextFieldWrapper>
+        <StyledTextFieldWrapper>
+          <StyledTextField
+          multiline
+          resizable
+            maxLength={80}
+            type="text"
+            name="note"
+            onChange={handleOnChange}
+            value={card.note}
+            label="Note - optional"
+          />
+        </StyledTextFieldWrapper>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            {numberToULevel(card.level)}
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={(e) => handleCardULevel("1")}>Learning</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => handleCardULevel("2")}>Familiar</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => handleCardULevel("3")}>Known</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
       <StyledActions>
         <Button

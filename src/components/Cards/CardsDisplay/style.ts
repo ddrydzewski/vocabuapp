@@ -13,6 +13,7 @@ export const AddButtonContainer = styled.div`
   justify-content: center;
   text-align: center;
   margin: auto;
+  margin-top: 5px;
   width: 3%;
 
   &:hover {
