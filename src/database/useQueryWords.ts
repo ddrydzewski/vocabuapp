@@ -1,18 +1,22 @@
-import firebase from "firebase";
+import { useEffect, useState } from "react";
+import { useAppState } from "../context/state";
 import { IWords } from "../types/IWords";
-import { IWordsFirebase } from "../types/IWordsFirebase";
 
-export const useQueryWords = async (
-  wordsCollection: firebase.firestore.CollectionReference<IWordsFirebase>
-) => {
-  const result: IWords[] = [];
-  wordsCollection.onSnapshot((snapshot) => {
-    result.length = 0;
-    snapshot.forEach((doc) => {
-      const item = doc.data();
-      const word = { ...item, id: doc.id };
-      result.push(word);
+export const useQueryWords = () => {
+  const { wordsCollection } = useAppState();
+  const [words, setWords] = useState<IWords[]>([]);
+
+  useEffect(() => { 
+    wordsCollection && wordsCollection.onSnapshot(snapshot => {
+      const result: IWords[] = [];
+      snapshot.forEach((doc) => {
+        const item = doc.data();
+        const word = { ...item, id: doc.id };
+        result.push(word);
+      });
+      setWords(result);
     });
-  });
-  return result;
+  }, [wordsCollection]);
+
+  return words;
 };

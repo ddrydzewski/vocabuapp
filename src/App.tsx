@@ -5,10 +5,14 @@ import { LoadingSpinner } from "./components/LoadingSpinner/LoadingSpinner";
 import { Logged } from "./components/Logged/Logged";
 import { Routes } from "./components/Routes/Routes";
 import { TopNavbar } from "./components/TopNavbar/TopNavbar";
+import { useAppDispatch, useAppState } from "./context/state";
+import { getCollection } from "./database/collection";
 
 function App() {
   const [user, setUser] = useState<firebase.User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { wordsCollection } = useAppState();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const unregisterAuthObserver = firebase
@@ -20,13 +24,21 @@ function App() {
     return () => unregisterAuthObserver();
   }, []);
 
+  useEffect(() => {
+    user?.uid &&
+      (async function () {
+        const collection = await getCollection();
+        dispatch({ type: "updateWordsCollection", payload: collection });
+      })();
+  }, [dispatch, user]);
+
   return (
     <>
       <HashRouter>
         <TopNavbar />
         <Routes />
       </HashRouter>
-      {user && <Logged />}
+      {user && wordsCollection && <Logged />}
       {isLoading && <LoadingSpinner />}
     </>
   );
