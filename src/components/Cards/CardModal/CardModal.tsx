@@ -1,14 +1,15 @@
 import { BodyText, InputChangeEvent } from "precise-ui/dist/es6";
 import React, { useEffect, useState } from "react";
-import { Button, Dropdown } from "react-bootstrap";
+import { Button, Dropdown, DropdownButton, InputGroup } from "react-bootstrap";
 import ReactModal from "react-modal";
 import { useAppDispatch, useAppState } from "../../../context/state";
 import { addWords } from "../../../database/add";
 import { editWords } from "../../../database/edit";
+import { colors } from "../../../design/colorStyles/colorStyles";
 import { uLevel } from "../../../enums/uLevel";
 import { IWordsFirebase } from "../../../types/IWordsFirebase";
+import { isNewCategory } from "../../../utilts/category/isNewCategory";
 import { checkDuplicate } from "../../../utilts/checkDuplicate";
-import { numberToULevel } from "../../../utilts/numberToLevel";
 import {
   ModalStyles,
   StyledActions,
@@ -21,7 +22,7 @@ export const emptyCard: IWordsFirebase = {
   translation: "",
   level: uLevel.low,
   category: "all",
-  note: ""
+  note: "",
 };
 
 export const CardModal: React.FC = () => {
@@ -30,19 +31,29 @@ export const CardModal: React.FC = () => {
     isEditMode,
     modalCard,
     words,
+    categories,
+    currentCategory,
     wordsCollection,
   } = useAppState();
   const [card, setCard] = useState<IWordsFirebase>(emptyCard);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    isEditMode && modalCard ? setCard(modalCard) : setCard(emptyCard);
-  }, [modalCard, isEditMode]);
+    isEditMode && modalCard
+      ? setCard(modalCard)
+      : setCard({ ...emptyCard, category: currentCategory });
+  }, [modalCard, isEditMode, currentCategory]);
 
   const onSubmit = () => {
     const duplicate = words && checkDuplicate(words, card.original);
     if (!duplicate || isEditMode) {
       !isEditMode ? addSubmit() : editSubmit();
+      if (isNewCategory(categories, card.category)) {
+        const categoryMap = categories.concat(card.category);
+        console.log(categoryMap);
+        console.log("tutaj category map");
+        dispatch({ type: "updateCategories", payload: categoryMap });
+      }
     } else {
       alert("This word already exist");
     }
@@ -75,10 +86,6 @@ export const CardModal: React.FC = () => {
     const target = e.value;
     setCard({ ...card, [e.originalEvent?.target.name]: target });
   };
-
-  const handleCardULevel = (ulevel: string) => {
-    setCard({ ...card, level: ulevel });
-  }
 
   return (
     <ReactModal
@@ -114,28 +121,43 @@ export const CardModal: React.FC = () => {
             label="Translation"
           />
         </StyledTextFieldWrapper>
-        <StyledTextFieldWrapper>
+        <InputGroup>
           <StyledTextField
-          multiline
-          resizable
-            maxLength={80}
+            maxLength={30}
             type="text"
-            name="note"
+            name="category"
             onChange={handleOnChange}
-            value={card.note}
-            label="Note - optional"
+            value={card.category}
+            label="Category"
+            style={{ backgroundColor: colors.primeColor }}
           />
-        </StyledTextFieldWrapper>
-        <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            {numberToULevel(card.level)}
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={(e) => handleCardULevel("1")}>Learning</Dropdown.Item>
-            <Dropdown.Item onClick={(e) => handleCardULevel("2")}>Familiar</Dropdown.Item>
-            <Dropdown.Item onClick={(e) => handleCardULevel("3")}>Known</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+          <DropdownButton
+            as={InputGroup.Append}
+            variant="outline-secondary"
+            title="Select from category"
+            size="sm"
+            id="input-group-dropdown-2"
+            style={{ marginBottom: "0.5rem" }}
+          >
+            {categories.map((cat) => (
+              <Dropdown.Item
+                key={cat}
+                onClick={() => setCard({ ...card, category: cat })}
+              >
+                {cat}
+              </Dropdown.Item>
+            ))}
+          </DropdownButton>
+        </InputGroup>
+        <StyledTextField
+          multiline
+          maxLength={80}
+          type="text"
+          name="note"
+          onChange={handleOnChange}
+          value={card.note}
+          label="Note - optional"
+        />
       </div>
       <StyledActions>
         <Button

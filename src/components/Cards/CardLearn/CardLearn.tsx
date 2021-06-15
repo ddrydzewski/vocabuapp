@@ -54,7 +54,9 @@ export const CardLearn = () => {
   return (
     <TestsContainer>
       {isModalOpen && <CardModal />}
-      <div style={{fontSize:"25px"}}>{words && next + 1 + "/" + words?.length}</div>
+      <div style={{ fontSize: "25px" }}>
+        {words && next + 1 + "/" + words?.length}
+      </div>
       {words && words?.length > 0 && <CardDetails card={words[next]} />}
       <div style={{ marginBottom: "15px" }}>
         {!isRandomMode && (
@@ -91,7 +93,7 @@ export const CardLearn = () => {
       </div>
       <div style={{ marginTop: "15px" }}>
         <Button onClick={handleTranslationMode} variant="outline-dark">
-          {isTranslationSide ? "Base" : "Translation"}
+          {isTranslationSide ? "Translation" : "Base"}
         </Button>
       </div>
     </TestsContainer>

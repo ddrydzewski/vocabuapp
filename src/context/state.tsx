@@ -10,6 +10,8 @@ type Action =
   | { type: "updateModalCard"; payload: IWords }
   | { type: "updateIsFetched"; payload: boolean }
   | { type: "updateIsTranslationSide"; payload: boolean }
+  | { type: "updateCategories"; payload: string[] }
+  | { type: "updateCurrentCategory"; payload: string }
   | {
       type: "updateWordsCollection";
       payload: firebase.firestore.CollectionReference<IWordsFirebase>;
@@ -18,12 +20,14 @@ type Action =
 type Dispatch = (action: Action) => void;
 
 type State = {
-  words: IWords[] | undefined;
+  words: IWords[];
   isModalOpen: boolean;
   isEditMode: boolean;
   modalCard?: IWords;
   isFetched: boolean;
   isTranslationSide: boolean;
+  categories: string[];
+  currentCategory: string;
   wordsCollection?: firebase.firestore.CollectionReference<IWordsFirebase>;
 };
 type StateProviderProps = { children: React.ReactNode };
@@ -37,6 +41,8 @@ const initAppState: State = {
   isModalOpen: false,
   isFetched: false,
   isTranslationSide: false,
+  categories: ["all"],
+  currentCategory: "all",
 };
 
 function appStateReducer(state: State, action: Action) {
@@ -58,6 +64,12 @@ function appStateReducer(state: State, action: Action) {
     }
     case "updateIsTranslationSide": {
       return { ...state, isTranslationSide: action.payload };
+    }
+    case "updateCategories": {
+      return { ...state, categories: action.payload };
+    }
+    case "updateCurrentCategory": {
+      return { ...state, currentCategory: action.payload };
     }
     case "updateWordsCollection": {
       return { ...state, wordsCollection: action.payload };

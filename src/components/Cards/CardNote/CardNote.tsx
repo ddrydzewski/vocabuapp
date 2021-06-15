@@ -8,7 +8,7 @@ interface IProps {
 
 export const CardNote: React.FC<IProps> = ({ note }) => {
   return (
-    <div>
+
       <OverlayTrigger
         key={note}
         placement={"bottom"}
@@ -16,6 +16,6 @@ export const CardNote: React.FC<IProps> = ({ note }) => {
       >
         <Icon name="Info" />
       </OverlayTrigger>
-    </div>
+   
   );
 };
