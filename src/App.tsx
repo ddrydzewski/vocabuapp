@@ -25,7 +25,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    user?.uid &&
+    user && user?.uid && 
       (async function () {
         const collection = await getCollection();
         dispatch({ type: "updateWordsCollection", payload: collection });
