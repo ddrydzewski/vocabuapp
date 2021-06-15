@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
-import { useAppDispatch, useAppState } from "../../context/state";
-import { getRandomIntNotTheSame } from "../../utilts/getRandomIntNotTheSame";
-import { useKey } from "../../utilts/useKey";
+import { useAppDispatch, useAppState } from "../../../context/state";
+import { getRandomIntNotTheSame } from "../../../utilts/getRandomIntNotTheSame";
+import { useKey } from "../../../utilts/useKey";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { CardModal } from "../CardModal/CardModal";
 import { TestsContainer } from "./style";
@@ -54,7 +54,9 @@ export const CardLearn = () => {
   return (
     <TestsContainer>
       {isModalOpen && <CardModal />}
-      <div>{words && next + 1 + "/" + words?.length}</div>
+      <div style={{ fontSize: "25px" }}>
+        {words && next + 1 + "/" + words?.length}
+      </div>
       {words && words?.length > 0 && <CardDetails card={words[next]} />}
       <div style={{ marginBottom: "15px" }}>
         {!isRandomMode && (
@@ -91,7 +93,7 @@ export const CardLearn = () => {
       </div>
       <div style={{ marginTop: "15px" }}>
         <Button onClick={handleTranslationMode} variant="outline-dark">
-          {isTranslationSide ? "Polish" : "English"}
+          {isTranslationSide ? "Translation" : "Base"}
         </Button>
       </div>
     </TestsContainer>

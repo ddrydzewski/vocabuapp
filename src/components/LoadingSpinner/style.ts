@@ -1,6 +1,6 @@
-import { colors, Container, styled } from 'precise-ui';
+import { colors, styled } from 'precise-ui';
 
-export const StyledContainer = styled(Container)`
+export const StyledContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;

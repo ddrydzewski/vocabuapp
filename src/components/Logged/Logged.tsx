@@ -1,34 +1,33 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import * as React from "react";
-import { useEffect } from "react";
-import { useAppDispatch } from "../../context/state";
-import { getCollection } from "../../database/collection";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppState } from "../../context/state";
 import { useQueryWords } from "../../database/useQueryWords";
-import { IWords } from "../../types/IWords";
+import { getCategories } from "../../utilts/category/getCategories";
 
 export const Logged = () => {
-  const [words, setWords] = React.useState<IWords[]>([]);
+  const { words, categories } = useAppState();
+  const [isCategory, setIsCategory] = useState(false)
+  const dataWords = useQueryWords();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    (async function () {
-      initFirestore();
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch({ type: "updateWords", payload: dataWords });
+  }, [dispatch, dataWords]);
 
   useEffect(() => {
-    dispatch({ type: "updateWords", payload: words });
-  }, [dispatch, words]);
+    if (words.length > 0 && !isCategory) {
+      const dataCategories = getCategories(words);
+      dispatch({ type: "updateCategories", payload: dataCategories });
+      setIsCategory(true);
+    }
+  }, [categories, words, dispatch, isCategory]);
 
-  const initFirestore = async () => {
-    const collection = await getCollection();
-    const data = await useQueryWords(collection);
-    dispatch({ type: "updateWords", payload: data });
-    dispatch({ type: "updateWordsCollection", payload: collection });
-    dispatch({ type: "updateIsFetched", payload: true });
-    setWords(data);
-  };
+  useEffect(() => {
+    if (words.length > 0 && categories.length >= 1) {
+      dispatch({ type: "updateIsFetched", payload: true });
+    } else {
+      dispatch({ type: "updateIsFetched", payload: false });
+    }
+  }, [categories, words, dispatch]);
 
   return null;
 };

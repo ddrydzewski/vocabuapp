@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import { uLevel } from "../enums/uLevel";
 import { IWordsFirebase } from "../types/IWordsFirebase";
 import { getDate } from "../utilts/getDate";
 import { firebaseApp, firestoreDB } from "./core";
@@ -22,12 +23,18 @@ const checkExistsCollection = async () => {
         firestoreDB
           .collection("userData")
           .doc(userID)
-          .set({ userWords: getDate() });
+          .set({ startUserDate: getDate() });
         firestoreDB
           .collection("userData")
           .doc(userID)
           .collection("userWords")
-          .add({ engword: "hello", plword: "hejka" });
+          .add({
+            original: "hejka",
+            translation: "hello",
+            category: "all",
+            level: uLevel.low,
+            note: "Your note",
+          });
       }
     })
     .catch((error) => {

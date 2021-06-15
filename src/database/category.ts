@@ -2,7 +2,7 @@ import firebase from "firebase";
 import { IWords } from "../types/IWords";
 import { IWordsFirebase } from "../types/IWordsFirebase";
 
-export const editWords = (
+export const updateCategory = (
   words: IWords,
   wordsCollection:
     | firebase.firestore.CollectionReference<IWordsFirebase>
@@ -10,11 +10,8 @@ export const editWords = (
 ) => {
   wordsCollection
     ? wordsCollection.doc(words.id).set({
-      original: words.original,
-      translation: words.translation,
-      category: words.category,
-      level: words.level,
-      note: words.note
+        ...words,
+        category: words.category
       })
-    : console.log("edit words error");
+    : console.log("edit category error");
 };

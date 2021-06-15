@@ -2,19 +2,17 @@ import firebase from "firebase";
 import { IWords } from "../types/IWords";
 import { IWordsFirebase } from "../types/IWordsFirebase";
 
-export const editWords = (
+export const updateULevel = (
   words: IWords,
+  ulevel: string,
   wordsCollection:
     | firebase.firestore.CollectionReference<IWordsFirebase>
     | undefined
 ) => {
   wordsCollection
     ? wordsCollection.doc(words.id).set({
-      original: words.original,
-      translation: words.translation,
-      category: words.category,
-      level: words.level,
-      note: words.note
+        ...words,
+        level: ulevel
       })
-    : console.log("edit words error");
+    : console.log("edit uLevel error");
 };
