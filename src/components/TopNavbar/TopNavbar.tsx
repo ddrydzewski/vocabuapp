@@ -20,6 +20,7 @@ export const TopNavbar = () => {
             <Nav.Link href="#words">Words</Nav.Link>
             <NavDropdown title="Vocabu Games" id="basic-nav-dropdown">
               <NavDropdown.Item href="#learn">Learn</NavDropdown.Item>
+              <NavDropdown.Item href="#test">Test Yourself</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Form inline>
