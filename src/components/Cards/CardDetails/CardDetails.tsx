@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Dropdown } from "react-bootstrap";
 import { useAppDispatch, useAppState } from "../../../context/state";
 import { deleteWords } from "../../../database/delete";
-import { updateULevel } from "../../../database/level";
+import { editWords } from "../../../database/edit";
 import { IWords } from "../../../types/IWords";
 import { levelToBorderColor } from "../../../utilts/uLevel/levelToBorderColor";
 import { useKey } from "../../../utilts/useKey";
@@ -64,7 +64,7 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
 
   const handleCardULevel = (ulevel: string) => {
     setCardLevel(ulevel);
-    updateULevel(card, ulevel, wordsCollection);
+    editWords({...card, level: ulevel}, wordsCollection);
   };
 
   return (
