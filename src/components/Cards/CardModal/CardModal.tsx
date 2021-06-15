@@ -50,8 +50,6 @@ export const CardModal: React.FC = () => {
       !isEditMode ? addSubmit() : editSubmit();
       if (isNewCategory(categories, card.category)) {
         const categoryMap = categories.concat(card.category);
-        console.log(categoryMap);
-        console.log("tutaj category map");
         dispatch({ type: "updateCategories", payload: categoryMap });
       }
     } else {
