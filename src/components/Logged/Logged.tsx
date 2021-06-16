@@ -16,7 +16,6 @@ export const Logged = () => {
   useEffect(() => {
     if (words.length > 0 && !isCategory) {
       const dataCategories = getCategories(words);
-      console.log(dataCategories);
       dispatch({ type: "updateCategories", payload: dataCategories });
       setIsCategory(true);
     }
