@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, ButtonGroup } from "react-bootstrap";
-import { useAppDispatch, useAppState } from "../../../context/state";
+import { Button } from "react-bootstrap";
+import { useAppState } from "../../../context/state";
 import { getRandomIntNotTheSame } from "../../../utilts/getRandomIntNotTheSame";
 import { useKey } from "../../../utilts/useKey";
 import { CardDetails } from "../CardDetails/CardDetails";
-import { CardModal } from "../CardModal/CardModal";
+import { CardOptions } from "../CardOptions/CardOptions";
 import { TestsContainer } from "./style";
 
 export const CardLearn = () => {
-  const { words, isModalOpen, isTranslationSide } = useAppState();
-  const dispatch = useAppDispatch();
+  const { currentWords, isRandomMode, currentCategory } = useAppState();
   const [next, setNext] = useState(0);
   const [lastNumber, setLastNumber] = useState(0);
-  const [isRandomMode, setIsRandomMode] = useState(false);
   const leftArrow = useKey("ArrowLeft");
   const rightArrow = useKey("ArrowRight");
 
@@ -22,18 +20,25 @@ export const CardLearn = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [leftArrow, rightArrow]);
 
+  useEffect(() => {
+    setNext(0);
+  }, [currentCategory])
+
   const setCard = (isForward: boolean) => {
-    if (!words) return;
+    if (!currentWords) return;
     if (isForward) {
-      next < words.length - 1 ? setNext(next + 1) : setNext(0);
+      next < currentWords.length - 1 ? setNext(next + 1) : setNext(0);
     } else {
-      next === 0 ? setNext(words.length - 1) : setNext(next - 1);
+      next === 0 ? setNext(currentWords.length - 1) : setNext(next - 1);
     }
   };
 
   const setRandomCard = () => {
-    if (words) {
-      const randomNumber = getRandomIntNotTheSame(words.length, lastNumber);
+    if (currentWords) {
+      const randomNumber = getRandomIntNotTheSame(
+        currentWords.length,
+        lastNumber
+      );
       setLastNumber(randomNumber);
       setNext(randomNumber);
     }
@@ -47,55 +52,36 @@ export const CardLearn = () => {
     !isRandomMode && setCard(false);
   };
 
-  const handleTranslationMode = () => {
-    dispatch({ type: "updateIsTranslationSide", payload: !isTranslationSide });
-  };
-
   return (
-    <TestsContainer>
-      {isModalOpen && <CardModal />}
-      <div style={{ fontSize: "25px" }}>
-        {words && next + 1 + "/" + words?.length}
-      </div>
-      {words && words?.length > 0 && <CardDetails card={words[next]} />}
-      <div style={{ marginBottom: "15px" }}>
-        {!isRandomMode && (
-          <Button
-            style={{ marginRight: "5px" }}
-            variant="primary"
-            disabled={!(words && words?.length > 0)}
-            onClick={handlePrevCard}
-          >
-            Prev
-          </Button>
+    <>
+      <TestsContainer>
+        <div style={{ fontSize: "25px" }}>
+          {currentWords && next + 1 + "/" + currentWords.length}
+        </div>
+        {currentWords[next] && currentWords?.length > 0 && (
+          <CardDetails card={currentWords[next]} />
         )}
-        <Button
-          variant="primary"
-          disabled={!(words && words?.length > 0)}
-          onClick={handleNextCard}
-        >
-          Next
-        </Button>
-      </div>
-      <div>
-        <ButtonGroup>
+        <div style={{ marginBottom: "15px" }}>
+          {!isRandomMode && (
+            <Button
+              style={{ marginRight: "5px" }}
+              variant="primary"
+              disabled={!(currentWords && currentWords?.length > 0)}
+              onClick={handlePrevCard}
+            >
+              Prev
+            </Button>
+          )}
           <Button
-            style={{ marginRight: "5px" }}
-            variant="success"
-            onClick={(e) => setIsRandomMode(false)}
+            variant="primary"
+            disabled={!(currentWords && currentWords?.length > 0)}
+            onClick={handleNextCard}
           >
-            In order
+            Next
           </Button>
-          <Button variant="success" onClick={(e) => setIsRandomMode(true)}>
-            Random
-          </Button>
-        </ButtonGroup>
-      </div>
-      <div style={{ marginTop: "15px" }}>
-        <Button onClick={handleTranslationMode} variant="outline-dark">
-          {isTranslationSide ? "Translation" : "Base"}
-        </Button>
-      </div>
-    </TestsContainer>
+        </div>
+      </TestsContainer>
+      <CardOptions />
+    </>
   );
 };
