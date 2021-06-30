@@ -75,7 +75,7 @@ export const CardDetails: React.FC<IProps> = ({ card, isTestWordsMode }) => {
           onClick={cardSideClick}
           style={{
             border: levelToBorderColor(cardLevel),
-            cursor: "pointer",
+            cursor: !isTestWordsMode ? "pointer" : "default",
             borderRadius: "3px",
             height: "100px",
           }}
