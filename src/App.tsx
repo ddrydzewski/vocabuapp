@@ -14,6 +14,7 @@ function App() {
   const { wordsCollection } = useAppState();
   const dispatch = useAppDispatch();
 
+  // User 
   useEffect(() => {
     const unregisterAuthObserver = firebase
       .auth()
@@ -24,6 +25,7 @@ function App() {
     return () => unregisterAuthObserver();
   }, []);
 
+  // User collection
   useEffect(() => {
     user && user?.uid && 
       (async function () {
