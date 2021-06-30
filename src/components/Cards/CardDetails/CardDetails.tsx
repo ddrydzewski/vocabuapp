@@ -42,7 +42,7 @@ export const CardDetails: React.FC<IProps> = ({ card, isTestWordsMode }) => {
   }, [shift]);
 
   const cardSideClick = () => {
-    setCardSide(!cardSide);
+    !isTestWordsMode && setCardSide(!cardSide);
   };
 
   const onDelete = () => {
