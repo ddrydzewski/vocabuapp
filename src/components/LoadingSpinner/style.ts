@@ -1,4 +1,4 @@
-import { colors, styled } from 'precise-ui';
+import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   position: fixed;
@@ -6,7 +6,7 @@ export const StyledContainer = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: ${colors.eclipse};
+  background: grey;
   z-index: 999;
   display: flex;
   justify-content: center;

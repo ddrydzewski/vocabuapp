@@ -1,4 +1,4 @@
-import { styled } from "precise-ui";
+import styled from "styled-components";
  
 export const StartText = styled.div`
   margin: auto;

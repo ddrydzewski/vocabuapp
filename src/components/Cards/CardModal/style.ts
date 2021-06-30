@@ -1,5 +1,6 @@
-import { styled, TextField } from "precise-ui";
+import { TextField } from "precise-ui";
 import { black } from "precise-ui/dist/es6/colors";
+import styled from "styled-components";
 import { colors } from "../../../design/colorStyles/colorStyles";
 
 export const ModalStyles = {
