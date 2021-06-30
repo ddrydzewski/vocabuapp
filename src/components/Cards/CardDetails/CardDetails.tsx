@@ -18,9 +18,10 @@ import {
 
 interface IProps {
   card: IWords;
+  isTestWordsMode?: boolean;
 }
 
-export const CardDetails: React.FC<IProps> = ({ card }) => {
+export const CardDetails: React.FC<IProps> = ({ card, isTestWordsMode }) => {
   const dispatch = useAppDispatch();
   const { wordsCollection, isTranslationSide, words } = useAppState();
   const [cardSide, setCardSide] = useState(isTranslationSide);
@@ -49,7 +50,7 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
   };
 
   const confirmDelete = () => {
-    if(words.length > 1){
+    if (words.length > 1) {
       if (window.confirm("do you really want to delete it ?")) {
         onDelete();
       }
@@ -64,7 +65,7 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
 
   const handleCardULevel = (ulevel: string) => {
     setCardLevel(ulevel);
-    editWords({...card, level: ulevel}, wordsCollection);
+    editWords({ ...card, level: ulevel }, wordsCollection);
   };
 
   return (
@@ -85,43 +86,50 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
             </WordContainer>{" "}
           </Card.Title>
         </Card.Body>
-        <Card.Footer className="text-muted" style={{ height: "35px" }}>
-          <IconContainer>
-            <Icon
-              style={{
-                marginRight: "5px",
-                marginBottom: "2px",
-                cursor: "pointer",
-              }}
-              name="Create"
-              onClick={onEdit}
-            ></Icon>
-            <Icon
-              style={{ marginBottom: "2px", cursor: "pointer" }}
-              name="Delete"
-              onClick={confirmDelete}
-            ></Icon>
-            <DropdownContainer>
-              <Dropdown>
-                <Dropdown.Toggle size="sm" variant="info" id="dropdown-basic" style={{height: "25px"}} />
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={(e) => handleCardULevel("1")}>
-                    Learning
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={(e) => handleCardULevel("2")}>
-                    Familiar
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={(e) => handleCardULevel("3")}>
-                    Known{" "}
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </DropdownContainer>
-            <NoteContainer>
-              {card.note && <CardNote note={card.note} />}
-            </NoteContainer>
-          </IconContainer>
-        </Card.Footer>
+        {!isTestWordsMode && (
+          <Card.Footer className="text-muted" style={{ height: "35px" }}>
+            <IconContainer>
+              <Icon
+                style={{
+                  marginRight: "5px",
+                  marginBottom: "2px",
+                  cursor: "pointer",
+                }}
+                name="Create"
+                onClick={onEdit}
+              ></Icon>
+              <Icon
+                style={{ marginBottom: "2px", cursor: "pointer" }}
+                name="Delete"
+                onClick={confirmDelete}
+              ></Icon>
+              <DropdownContainer>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    size="sm"
+                    variant="info"
+                    id="dropdown-basic"
+                    style={{ height: "25px" }}
+                  />
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={(e) => handleCardULevel("1")}>
+                      Learning
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={(e) => handleCardULevel("2")}>
+                      Familiar
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={(e) => handleCardULevel("3")}>
+                      Known{" "}
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </DropdownContainer>
+              <NoteContainer>
+                {card.note && <CardNote note={card.note} />}
+              </NoteContainer>
+            </IconContainer>
+          </Card.Footer>
+        )}
       </Card>
     </CardContainer>
   );

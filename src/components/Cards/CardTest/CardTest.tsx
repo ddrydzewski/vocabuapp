@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, FormControl } from "react-bootstrap";
 import { useAppState } from "../../../context/state";
+import { CardDetails } from "../CardDetails/CardDetails";
 import { CardContainer } from "../CardDetails/style";
 import { CardOptions } from "../CardOptions/CardOptions";
 
@@ -26,7 +27,7 @@ export const CardTest = () => {
       {isActive && (
         <div>
           <CardContainer>
-            {currentWords.length > 0 && <div>{currentWords[nextNumber].original}</div>}
+            {currentWords.length > 0 && <CardDetails card={currentWords[nextNumber]} isTestWordsMode={true}/>}
           </CardContainer>
           <FormControl size="lg" type="text" placeholder="Your answer" />{" "}
           <Button onClick={() => setNextNumber(nextNumber + 1)}>
