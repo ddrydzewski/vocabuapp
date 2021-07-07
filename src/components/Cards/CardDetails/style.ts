@@ -1,4 +1,4 @@
-import { styled } from "precise-ui";
+import styled from "styled-components";
 import { colors } from "../../../design/colorStyles/colorStyles";
 
 export const CardContainer = styled.div`

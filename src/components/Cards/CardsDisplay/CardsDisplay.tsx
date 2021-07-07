@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Button, Container, Row, Tab, Tabs } from "react-bootstrap";
 import { useAppDispatch, useAppState } from "../../../context/state";
 import { CardDetails } from "../CardDetails/CardDetails";
-import { CardModal } from "../CardModal/CardModal";
 import {
   AddButtonContainer,
   CardsContainer,
@@ -13,12 +12,12 @@ import {
 } from "./style";
 
 export const CardsDisplay = () => {
-  const { words, isModalOpen, categories } = useAppState();
+  const { isModalOpen, categories, currentWords } = useAppState();
   const dispatch = useAppDispatch();
   const [top, setTop] = useState(1);
   const [bottom, setBottom] = useState(0);
   const [cardMaxNumber] = useState(15);
-  const [key, setKey] = useState<string>("all");
+  const [key, setKey] = useState("all");
 
   useEffect(() => {
     dispatch({ type: "updateCurrentCategory", payload: key });
@@ -29,7 +28,7 @@ export const CardsDisplay = () => {
   };
 
   const handleNextCards = () => {
-    if (words.length > top * cardMaxNumber) {
+    if (currentWords.length > top * cardMaxNumber) {
       setBottom(bottom + 1);
       setTop(top + 1);
     }
@@ -42,13 +41,19 @@ export const CardsDisplay = () => {
     }
   };
 
+  const selectCategory = (value: string) => {
+    setKey(value);
+    setTop(1);
+    setBottom(0);
+  };
+
   return (
     <>
       <CardsContainer>
         <Tabs
           id="controlled-tab-example"
           activeKey={key}
-          onSelect={(k) => k !== null && setKey(k)}
+          onSelect={(k) => k !== null && selectCategory(k)}
         >
           {categories.map((category) => (
             <Tab key={category} eventKey={category} title={category} />
@@ -56,19 +61,16 @@ export const CardsDisplay = () => {
         </Tabs>
         <Container>
           <Row>
-            {words.length > 0 &&
-              words
+            {currentWords.length > 0 &&
+              currentWords
                 .slice(bottom * cardMaxNumber, top * cardMaxNumber)
-                .map(
-                  (words) =>
-                    words.category === key && (
-                      <CardDetails key={words.id} card={words} />
-                    )
-                )}
+                .map((current) => (
+                  <CardDetails key={current.id} card={current} />
+                ))}
           </Row>
         </Container>
       </CardsContainer>
-      {words.length > cardMaxNumber && (
+      {currentWords.length > cardMaxNumber && (
         <Icons>
           <Icon
             name="KeyboardArrowLeft"
@@ -88,7 +90,6 @@ export const CardsDisplay = () => {
           <Icon name="Add" />
         </Button>
       </AddButtonContainer>
-      {isModalOpen && <CardModal />}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Button, Form, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Badge, Button, Form, Nav, Navbar } from "react-bootstrap";
 import { firebaseApp } from "../../database/core";
 
 export const TopNavbar = () => {
@@ -16,13 +16,12 @@ export const TopNavbar = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       {firebaseApp.auth().currentUser ? (
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto" style={{ marginLeft: "15px" }}>
-            <Nav.Link href="#words">Words</Nav.Link>
-            <NavDropdown title="Vocabu Games" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#learn">Learn</NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-          <Form inline>
+          <Nav className="mr-auto" style={{ marginLeft: "25px" }}>
+            <Nav.Link style={{marginRight: "15px"}} href="#words">Words</Nav.Link>
+            <Nav.Link href="#learn">Learn</Nav.Link>
+            <Nav.Link href="#test">Test Yourself</Nav.Link>
+          </Nav> 
+          <Form inline style={{ marginRight: "2%" }}>
             <Badge style={{ marginRight: "15px" }} variant="secondary">
               {firebaseApp.auth().currentUser?.displayName}
             </Badge>
@@ -49,6 +48,3 @@ export const TopNavbar = () => {
     </Navbar>
   );
 };
-
-// {/* <NavDropdown.Divider />
-// <NavDropdown.Item>Separated link</NavDropdown.Item> */}

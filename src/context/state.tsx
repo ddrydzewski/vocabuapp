@@ -1,33 +1,40 @@
 import firebase from "firebase";
 import * as React from "react";
+import { IULevel } from "../types/IULevel";
 import { IWords } from "../types/IWords";
 import { IWordsFirebase } from "../types/IWordsFirebase";
 
 type Action =
   | { type: "updateWords"; payload: IWords[] }
+  | { type: "updateCurrentWords"; payload: IWords[] }
   | { type: "updateIsModalOpen"; payload: boolean }
+  | { type: "updateIsOptionsOpen"; payload: boolean }
   | { type: "updateIsEditMode"; payload: boolean }
   | { type: "updateModalCard"; payload: IWords }
-  | { type: "updateIsFetched"; payload: boolean }
   | { type: "updateIsTranslationSide"; payload: boolean }
+  | { type: "updateIsRandomMode"; payload: boolean }
   | { type: "updateCategories"; payload: string[] }
   | { type: "updateCurrentCategory"; payload: string }
+  | { type: "updateCurrentULevels"; payload: IULevel }
   | {
       type: "updateWordsCollection";
       payload: firebase.firestore.CollectionReference<IWordsFirebase>;
-    }
+    };
 
 type Dispatch = (action: Action) => void;
 
 type State = {
   words: IWords[];
+  currentWords: IWords[];
   isModalOpen: boolean;
+  isOptionsOpen: boolean;
   isEditMode: boolean;
   modalCard?: IWords;
-  isFetched: boolean;
   isTranslationSide: boolean;
+  isRandomMode: boolean;
   categories: string[];
   currentCategory: string;
+  currentULevels: IULevel;
   wordsCollection?: firebase.firestore.CollectionReference<IWordsFirebase>;
 };
 type StateProviderProps = { children: React.ReactNode };
@@ -37,12 +44,15 @@ const AppDispatchContext = React.createContext<Dispatch | undefined>(undefined);
 
 const initAppState: State = {
   words: [],
+  currentWords: [],
   isEditMode: false,
   isModalOpen: false,
-  isFetched: false,
+  isOptionsOpen: false,
   isTranslationSide: false,
+  isRandomMode: false,
   categories: ["all"],
   currentCategory: "all",
+  currentULevels: { first: true, second: true, third: true },
 };
 
 function appStateReducer(state: State, action: Action) {
@@ -50,8 +60,14 @@ function appStateReducer(state: State, action: Action) {
     case "updateWords": {
       return { ...state, words: action.payload };
     }
+    case "updateCurrentWords": {
+      return { ...state, currentWords: action.payload };
+    }
     case "updateIsModalOpen": {
       return { ...state, isModalOpen: action.payload };
+    }
+    case "updateIsOptionsOpen": {
+      return { ...state, isOptionsOpen: action.payload };
     }
     case "updateIsEditMode": {
       return { ...state, isEditMode: action.payload };
@@ -59,17 +75,20 @@ function appStateReducer(state: State, action: Action) {
     case "updateModalCard": {
       return { ...state, modalCard: action.payload };
     }
-    case "updateIsFetched": {
-      return { ...state, isFetched: action.payload };
-    }
     case "updateIsTranslationSide": {
       return { ...state, isTranslationSide: action.payload };
+    }
+    case "updateIsRandomMode": {
+      return { ...state, isRandomMode: action.payload };
     }
     case "updateCategories": {
       return { ...state, categories: action.payload };
     }
     case "updateCurrentCategory": {
       return { ...state, currentCategory: action.payload };
+    }
+    case "updateCurrentULevels": {
+      return { ...state, currentULevels: action.payload };
     }
     case "updateWordsCollection": {
       return { ...state, wordsCollection: action.payload };

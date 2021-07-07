@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Card, Dropdown } from "react-bootstrap";
 import { useAppDispatch, useAppState } from "../../../context/state";
 import { deleteWords } from "../../../database/delete";
-import { updateULevel } from "../../../database/level";
+import { editWords } from "../../../database/edit";
 import { IWords } from "../../../types/IWords";
-import { levelToBorderColor } from "../../../utilts/uLevel/levelToBorderColor";
-import { useKey } from "../../../utilts/useKey";
+import { useKey } from "../../../utilts/keyboard/useKey";
+import { levelToBorderColor } from "../../../utilts/understandLevel/levelToBorderColor";
 import { CardNote } from "../CardNote/CardNote";
 import {
   CardContainer,
@@ -20,12 +20,11 @@ interface IProps {
   card: IWords;
 }
 
-export const CardDetails: React.FC<IProps> = ({ card }) => {
+export const CardDetails = React.memo<IProps>(({ card }) => {
   const dispatch = useAppDispatch();
   const { wordsCollection, isTranslationSide, words } = useAppState();
   const [cardSide, setCardSide] = useState(isTranslationSide);
   const [cardID, setCardID] = useState<string>("");
-  const [cardLevel, setCardLevel] = useState(card.level);
   const shift = useKey("Shift");
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
   }, [shift]);
 
   const cardSideClick = () => {
-    setCardSide(!cardSide);
+     setCardSide(!cardSide);
   };
 
   const onDelete = () => {
@@ -49,7 +48,7 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
   };
 
   const confirmDelete = () => {
-    if(words.length > 1){
+    if (words.length > 1) {
       if (window.confirm("do you really want to delete it ?")) {
         onDelete();
       }
@@ -63,8 +62,7 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
   };
 
   const handleCardULevel = (ulevel: string) => {
-    setCardLevel(ulevel);
-    updateULevel(card, ulevel, wordsCollection);
+    editWords({ ...card, level: ulevel }, wordsCollection);
   };
 
   return (
@@ -73,7 +71,7 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
         <Card.Body
           onClick={cardSideClick}
           style={{
-            border: levelToBorderColor(cardLevel),
+            border: levelToBorderColor(card.level),
             cursor: "pointer",
             borderRadius: "3px",
             height: "100px",
@@ -103,7 +101,12 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
             ></Icon>
             <DropdownContainer>
               <Dropdown>
-                <Dropdown.Toggle size="sm" variant="info" id="dropdown-basic" style={{height: "25px"}} />
+                <Dropdown.Toggle
+                  size="sm"
+                  variant="info"
+                  id="dropdown-basic"
+                  style={{ height: "25px" }}
+                />
                 <Dropdown.Menu>
                   <Dropdown.Item onClick={(e) => handleCardULevel("1")}>
                     Learning
@@ -125,4 +128,4 @@ export const CardDetails: React.FC<IProps> = ({ card }) => {
       </Card>
     </CardContainer>
   );
-};
+});
