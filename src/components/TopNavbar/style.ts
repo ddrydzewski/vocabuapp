@@ -8,7 +8,7 @@ export const TopNavbarContainer = styled.div`
   width: 100%;
   height: 10vh;
   min-height: 10vh;
-  color: #edf5e1;
+  color: ${colors.darkColor};
   font-weight: bold;
 `;
 

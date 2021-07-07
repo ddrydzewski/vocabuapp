@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useAppState } from "../../../context/state";
 import { getRandomIntNotTheSame } from "../../../utilts/getRandomIntNotTheSame";
-import { useKey } from "../../../utilts/useKey";
+import { useKey } from "../../../utilts/keyboard/useKey";
 import { CardDetails } from "../CardDetails/CardDetails";
 import { CardOptions } from "../CardOptions/CardOptions";
 import { TestsContainer } from "./style";
@@ -22,7 +22,7 @@ export const CardLearn = () => {
 
   useEffect(() => {
     setNext(0);
-  }, [currentCategory])
+  }, [currentCategory]);
 
   const setCard = (isForward: boolean) => {
     if (!currentWords) return;
@@ -80,8 +80,8 @@ export const CardLearn = () => {
             Next
           </Button>
         </div>
+        <CardOptions />
       </TestsContainer>
-      <CardOptions />
     </>
   );
 };

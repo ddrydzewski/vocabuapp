@@ -1,4 +1,4 @@
-export const numberToULevel = (uLevel: string) => {
+export const getUnderstandLevelText = (uLevel: string) => {
     switch(uLevel){
         case "1": {
             return "Learning"

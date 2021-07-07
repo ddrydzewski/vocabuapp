@@ -5,8 +5,8 @@ import { useAppDispatch, useAppState } from "../../../context/state";
 import { deleteWords } from "../../../database/delete";
 import { editWords } from "../../../database/edit";
 import { IWords } from "../../../types/IWords";
-import { levelToBorderColor } from "../../../utilts/uLevel/levelToBorderColor";
-import { useKey } from "../../../utilts/useKey";
+import { useKey } from "../../../utilts/keyboard/useKey";
+import { levelToBorderColor } from "../../../utilts/understandLevel/levelToBorderColor";
 import { CardNote } from "../CardNote/CardNote";
 import {
   CardContainer,
@@ -18,15 +18,13 @@ import {
 
 interface IProps {
   card: IWords;
-  isTestWordsMode?: boolean;
 }
 
-export const CardDetails: React.FC<IProps> = ({ card, isTestWordsMode }) => {
+export const CardDetails = React.memo<IProps>(({ card }) => {
   const dispatch = useAppDispatch();
   const { wordsCollection, isTranslationSide, words } = useAppState();
   const [cardSide, setCardSide] = useState(isTranslationSide);
   const [cardID, setCardID] = useState<string>("");
-  const [cardLevel, setCardLevel] = useState(card.level);
   const shift = useKey("Shift");
 
   useEffect(() => {
@@ -42,7 +40,7 @@ export const CardDetails: React.FC<IProps> = ({ card, isTestWordsMode }) => {
   }, [shift]);
 
   const cardSideClick = () => {
-    !isTestWordsMode && setCardSide(!cardSide);
+     setCardSide(!cardSide);
   };
 
   const onDelete = () => {
@@ -64,7 +62,6 @@ export const CardDetails: React.FC<IProps> = ({ card, isTestWordsMode }) => {
   };
 
   const handleCardULevel = (ulevel: string) => {
-    setCardLevel(ulevel);
     editWords({ ...card, level: ulevel }, wordsCollection);
   };
 
@@ -74,8 +71,8 @@ export const CardDetails: React.FC<IProps> = ({ card, isTestWordsMode }) => {
         <Card.Body
           onClick={cardSideClick}
           style={{
-            border: levelToBorderColor(cardLevel),
-            cursor: !isTestWordsMode ? "pointer" : "default",
+            border: levelToBorderColor(card.level),
+            cursor: "pointer",
             borderRadius: "3px",
             height: "100px",
           }}
@@ -86,51 +83,49 @@ export const CardDetails: React.FC<IProps> = ({ card, isTestWordsMode }) => {
             </WordContainer>{" "}
           </Card.Title>
         </Card.Body>
-        {!isTestWordsMode && (
-          <Card.Footer className="text-muted" style={{ height: "35px" }}>
-            <IconContainer>
-              <Icon
-                style={{
-                  marginRight: "5px",
-                  marginBottom: "2px",
-                  cursor: "pointer",
-                }}
-                name="Create"
-                onClick={onEdit}
-              ></Icon>
-              <Icon
-                style={{ marginBottom: "2px", cursor: "pointer" }}
-                name="Delete"
-                onClick={confirmDelete}
-              ></Icon>
-              <DropdownContainer>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    size="sm"
-                    variant="info"
-                    id="dropdown-basic"
-                    style={{ height: "25px" }}
-                  />
-                  <Dropdown.Menu>
-                    <Dropdown.Item onClick={(e) => handleCardULevel("1")}>
-                      Learning
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={(e) => handleCardULevel("2")}>
-                      Familiar
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={(e) => handleCardULevel("3")}>
-                      Known{" "}
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </DropdownContainer>
-              <NoteContainer>
-                {card.note && <CardNote note={card.note} />}
-              </NoteContainer>
-            </IconContainer>
-          </Card.Footer>
-        )}
+        <Card.Footer className="text-muted" style={{ height: "35px" }}>
+          <IconContainer>
+            <Icon
+              style={{
+                marginRight: "5px",
+                marginBottom: "2px",
+                cursor: "pointer",
+              }}
+              name="Create"
+              onClick={onEdit}
+            ></Icon>
+            <Icon
+              style={{ marginBottom: "2px", cursor: "pointer" }}
+              name="Delete"
+              onClick={confirmDelete}
+            ></Icon>
+            <DropdownContainer>
+              <Dropdown>
+                <Dropdown.Toggle
+                  size="sm"
+                  variant="info"
+                  id="dropdown-basic"
+                  style={{ height: "25px" }}
+                />
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={(e) => handleCardULevel("1")}>
+                    Learning
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={(e) => handleCardULevel("2")}>
+                    Familiar
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={(e) => handleCardULevel("3")}>
+                    Known{" "}
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </DropdownContainer>
+            <NoteContainer>
+              {card.note && <CardNote note={card.note} />}
+            </NoteContainer>
+          </IconContainer>
+        </Card.Footer>
       </Card>
     </CardContainer>
   );
-};
+});

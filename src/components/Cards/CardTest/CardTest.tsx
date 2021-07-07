@@ -1,40 +1,61 @@
 import React, { useState } from "react";
-import { Button, FormControl } from "react-bootstrap";
 import { useAppState } from "../../../context/state";
-import { CardDetails } from "../CardDetails/CardDetails";
-import { CardContainer } from "../CardDetails/style";
-import { CardOptions } from "../CardOptions/CardOptions";
+import { stateOfTest } from "../../../enums/stateOfTest";
+import { ITestWords } from "../../../types/ITestWords";
+import { checkAnswer } from "../../../utilts/checkSomething/checkAnswer";
+import { initRandomTest } from "../../../utilts/userTest/initRandomTest";
+import { CardTestContainer } from "./style";
+import { Active } from "./TestActive/Active";
+import { End } from "./TestEnd/End";
+import { Start } from "./TestStart/Start";
 
 export const CardTest = () => {
-  const { currentWords } = useAppState();
-  const [isStart, setIsStart] = useState(true);
-  const [isActive, setIsActive] = useState(false);
-  const [nextNumber, setNextNumber] = useState(0);
+  const { currentWords, isTranslationSide } = useAppState();
+  const [testWords, setTestWords] = useState<ITestWords[]>([]);
+  const [testState, setTestState] = useState<stateOfTest>(stateOfTest.start);
+  const [userAnswers, setUserAnswers] = useState<string[]>([]);
+  const [points, setPoints] = useState(0);
 
-  const handleStartButton = () => {
-    setIsStart(false);
-    setIsActive(true);
+  const handleStart = () => {
+    setTestWords(initRandomTest(currentWords, isTranslationSide));
+    setTestState(stateOfTest.active);
+  };
+
+  const handleEndTest = () => {
+    setTestState(stateOfTest.end);
+  };
+
+  const handleEndSummary = () => {
+    setUserAnswers([]);
+    setPoints(0);
+    setTestState(stateOfTest.start);
+  };
+
+  const checkAnswers = (answer: string, nextNumber: number) => {
+    setUserAnswers([...userAnswers, answer]);
+    if (checkAnswer(answer, testWords[nextNumber].correctAnswer)) {
+      setPoints(points + 1);
+    }
   };
 
   return (
-    <div>
-      {isStart && (
-        <div>
-          <CardOptions />
-          <Button onClick={handleStartButton}>Start Your Test</Button>
-        </div>
+    <CardTestContainer>
+      {testState === stateOfTest.start && <Start handleStart={handleStart} />}
+      {testState === stateOfTest.active && (
+        <Active
+          testWords={testWords}
+          checkAnswers={checkAnswers}
+          handleEndTest={handleEndTest}
+        />
       )}
-      {isActive && (
-        <div>
-          <CardContainer>
-            {currentWords.length > 0 && <CardDetails card={currentWords[nextNumber]} isTestWordsMode={true}/>}
-          </CardContainer>
-          <FormControl size="lg" type="text" placeholder="Your answer" />{" "}
-          <Button onClick={() => setNextNumber(nextNumber + 1)}>
-            Next word
-          </Button>
-        </div>
+      {testState === stateOfTest.end && (
+        <End
+          testWords={testWords}
+          userAnswers={userAnswers}
+          points={points}
+          handleEndSummary={handleEndSummary}
+        />
       )}
-    </div>
+    </CardTestContainer>
   );
 };

@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import * as React from "react";
+import { IULevel } from "../types/IULevel";
 import { IWords } from "../types/IWords";
 import { IWordsFirebase } from "../types/IWordsFirebase";
 
@@ -14,10 +15,11 @@ type Action =
   | { type: "updateIsRandomMode"; payload: boolean }
   | { type: "updateCategories"; payload: string[] }
   | { type: "updateCurrentCategory"; payload: string }
+  | { type: "updateCurrentULevels"; payload: IULevel }
   | {
       type: "updateWordsCollection";
       payload: firebase.firestore.CollectionReference<IWordsFirebase>;
-    }
+    };
 
 type Dispatch = (action: Action) => void;
 
@@ -32,6 +34,7 @@ type State = {
   isRandomMode: boolean;
   categories: string[];
   currentCategory: string;
+  currentULevels: IULevel;
   wordsCollection?: firebase.firestore.CollectionReference<IWordsFirebase>;
 };
 type StateProviderProps = { children: React.ReactNode };
@@ -49,6 +52,7 @@ const initAppState: State = {
   isRandomMode: false,
   categories: ["all"],
   currentCategory: "all",
+  currentULevels: { first: true, second: true, third: true },
 };
 
 function appStateReducer(state: State, action: Action) {
@@ -82,6 +86,9 @@ function appStateReducer(state: State, action: Action) {
     }
     case "updateCurrentCategory": {
       return { ...state, currentCategory: action.payload };
+    }
+    case "updateCurrentULevels": {
+      return { ...state, currentULevels: action.payload };
     }
     case "updateWordsCollection": {
       return { ...state, wordsCollection: action.payload };
