@@ -9,7 +9,8 @@ import { colors } from "../../../design/colorStyles/colorStyles";
 import { uLevel } from "../../../enums/uLevel";
 import { IWordsFirebase } from "../../../types/IWordsFirebase";
 import { isNewCategory } from "../../../utilts/category/isNewCategory";
-import { checkDuplicate } from "../../../utilts/checkDuplicate";
+import { checkDuplicate } from "../../../utilts/checkSomething/checkDuplicate";
+import { checkMinLength } from "../../../utilts/checkSomething/checkMinLength";
 import {
   ModalStyles,
   StyledActions,
@@ -59,7 +60,7 @@ export const CardModal: React.FC = () => {
   };
 
   const editSubmit = () => {
-    if (card.original !== null && card.translation !== null && modalCard) {
+    if (checkMinLength(card) && modalCard) {
       const helpEditWords = { ...card, id: modalCard.id };
       editWords(helpEditWords, wordsCollection);
     } else {
@@ -68,7 +69,7 @@ export const CardModal: React.FC = () => {
   };
 
   const addSubmit = () => {
-    if (card.original !== null && card.translation !== null && words) {
+    if (checkMinLength(card)) {
       addWords(card, wordsCollection);
     } else {
       alert("Check all fields");
