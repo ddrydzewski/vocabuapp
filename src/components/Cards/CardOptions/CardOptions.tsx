@@ -10,6 +10,7 @@ import {
 import { useAppDispatch, useAppState } from "../../../context/state";
 import { options } from "../../../enums/options";
 import { uLevel } from "../../../enums/uLevel";
+import { checkCurrentULevels } from "../../../utilts/understandLevel/checkCurrentULevels";
 import { ButtonStyled } from "../../style";
 import "./modalStyle.css";
 import { OptionContainer } from "./style";
@@ -44,6 +45,8 @@ export const CardOptions: React.FC<IProps> = ({ isTestMode }) => {
   };
 
   const handleULevels = (nameOfCheckbox: string) => {
+    if (checkCurrentULevels(currentULevels, nameOfCheckbox)) return;
+
     if (nameOfCheckbox === uLevel.low) {
       dispatch({
         type: "updateCurrentULevels",
@@ -65,10 +68,7 @@ export const CardOptions: React.FC<IProps> = ({ isTestMode }) => {
   return (
     <>
       <ButtonStyled>
-        <Button
-          variant="primary"
-          onClick={handleShow}
-        >
+        <Button variant="primary" onClick={handleShow}>
           Options
         </Button>
       </ButtonStyled>
