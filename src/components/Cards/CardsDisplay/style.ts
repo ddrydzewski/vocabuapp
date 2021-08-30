@@ -10,7 +10,7 @@ export const CardsContainer = styled.div`
   border-radius: 5px;
   text-align: center;
   width: 75%;
-  height: 75vh;
+  height: 70vh;
   overflow-y: auto;
   box-shadow: 0 12px 16px rgba(0, 0, 0, 0.12), 0 8px 12px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
