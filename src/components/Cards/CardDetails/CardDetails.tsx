@@ -22,7 +22,12 @@ interface IProps {
 
 export const CardDetails = React.memo<IProps>(({ card }) => {
   const dispatch = useAppDispatch();
-  const { wordsCollection, isTranslationSide, words } = useAppState();
+  const {
+    wordsCollection,
+    isTranslationSide,
+    words,
+    isModalOpen,
+  } = useAppState();
   const [cardSide, setCardSide] = useState(isTranslationSide);
   const [cardID, setCardID] = useState<string>("");
   const shift = useKey("Shift");
@@ -35,12 +40,12 @@ export const CardDetails = React.memo<IProps>(({ card }) => {
   }, [card.id, cardID, isTranslationSide]);
 
   useEffect(() => {
-    if (shift) cardSideClick();
+    if (shift && !isModalOpen) cardSideClick();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shift]);
 
   const cardSideClick = () => {
-     setCardSide(!cardSide);
+    setCardSide(!cardSide);
   };
 
   const onDelete = () => {
@@ -79,8 +84,8 @@ export const CardDetails = React.memo<IProps>(({ card }) => {
         >
           <Card.Title>
             <WordContainer>
-              {cardSide ? card.translation : card.original}{" "}
-            </WordContainer>{" "}
+              {cardSide ? card.translation : card.original}
+            </WordContainer>
           </Card.Title>
         </Card.Body>
         <Card.Footer className="text-muted" style={{ height: "35px" }}>

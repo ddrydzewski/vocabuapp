@@ -19,7 +19,9 @@ export const CardContainer = styled.div`
 `;
 
 export const WordContainer = styled.div`
+  display: flex;
   font-size: 25px;
+  justify-content: center;
   font-weight: bold;
   color: #05386b;
 `;
